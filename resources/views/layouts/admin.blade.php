@@ -20,9 +20,12 @@
                     </div>
 
                     <nav class="space-y-2">
-                        <a href="{{ route('pengembalian.index') }}" class="block rounded-3xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('pengembalian.*') ? 'bg-sky-100 text-sky-700' : 'text-slate-700 hover:bg-slate-50' }}">Pengembalian</a>
-                        <a href="{{ route('pembayaran.index') }}" class="block rounded-3xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('pembayaran.*') ? 'bg-sky-100 text-sky-700' : 'text-slate-700 hover:bg-slate-50' }}">Pembayaran</a>
-                        <a href="{{ route('rental.index') }}" class="block rounded-3xl px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('rental.*') ? 'bg-sky-100 text-sky-700' : 'text-slate-700 hover:bg-slate-50' }}">Rental</a>
+                        <a href="{{ route('pengembalian.index') }}" class="block rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('pengembalian.*') ? 'bg-sky-100 text-sky-700 shadow-sm' : 'text-slate-700 hover:bg-slate-200' }}">Pengembalian</a>
+                        <a href="{{ route('pembayaran.index') }}" class="block rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('pembayaran.*') ? 'bg-sky-100 text-sky-700 shadow-sm' : 'text-slate-700 hover:bg-slate-200' }}">Pembayaran</a>
+                        <a href="{{ route('rental.index') }}" class="block rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('rental.*') ? 'bg-sky-100 text-sky-700 shadow-sm' : 'text-slate-700 hover:bg-slate-200' }}">Rental</a>
+                        <a href="{{ route('denda.index') }}" class="block rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('denda.*') ? 'bg-sky-100 text-sky-700 shadow-sm' : 'text-slate-700 hover:bg-slate-200' }}">Denda</a>
+                        <a href="{{ route('customer.index') }}" class="block rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('customer.*') ? 'bg-sky-100 text-sky-700 shadow-sm' : 'text-slate-700 hover:bg-slate-200' }}">Customer</a>
+                        <a href="{{ route('promo.index') }}" class="block rounded-3xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm font-semibold transition {{ request()->routeIs('promo.*') ? 'bg-sky-100 text-sky-700 shadow-sm' : 'text-slate-700 hover:bg-slate-200' }}">Promo</a>
                     </nav>
 
                     <div class="rounded-[1.75rem] bg-slate-900 p-5 text-white shadow-lg shadow-slate-900/10">

@@ -7,6 +7,9 @@ use App\Http\Controllers\DataBookingController;
 use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DendaController;
+use App\Http\Controllers\PromoController;
 
 Route::redirect('/', '/home');
 
@@ -25,3 +28,12 @@ Route::resource('rental', RentalController::class);
 
 // Pembayaran routes
 Route::resource('pembayaran', PembayaranController::class);
+
+// Customer routes
+Route::resource('customer', CustomerController::class);
+
+// Denda routes
+Route::resource('denda', DendaController::class);
+
+// Promo routes
+Route::resource('promo', PromoController::class);

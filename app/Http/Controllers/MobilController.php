@@ -2,64 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mobil;
 use Illuminate\Http\Request;
+use App\Models\Mobil;
 
 class MobilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $mobils = Mobil::all();
+
+        return view('mobil.index', compact('mobils'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('mobil.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        Mobil::create([
+            'nama_mobil' => $request->nama_mobil,
+            'merk' => $request->merk,
+            'plat_nomor' => $request->plat_nomor,
+            'tahun' => $request->tahun,
+            'harga_sewa' => $request->harga_sewa,
+            'status' => $request->status,
+        ]);
+
+        return redirect('/mobil')
+                ->with('success', 'Data mobil berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Mobil $mobil)
+    public function edit(string $id)
     {
-        //
+        $mobil = Mobil::findOrFail($id);
+
+        return view('mobil.edit', compact('mobil'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Mobil $mobil)
+    public function update(Request $request, string $id)
     {
-        //
+        $mobil = Mobil::findOrFail($id);
+
+        $mobil->update([
+            'nama_mobil' => $request->nama_mobil,
+            'merk' => $request->merk,
+            'plat_nomor' => $request->plat_nomor,
+            'tahun' => $request->tahun,
+            'harga_sewa' => $request->harga_sewa,
+            'status' => $request->status,
+        ]);
+
+        return redirect('/mobil')
+                ->with('success', 'Data mobil berhasil diupdate');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Mobil $mobil)
+    public function destroy(string $id)
     {
-        //
-    }
+        $mobil = Mobil::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Mobil $mobil)
-    {
-        //
+        $mobil->delete();
+
+        return redirect('/mobil')
+                ->with('success', 'Data mobil berhasil dihapus');
     }
 }

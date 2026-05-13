@@ -1,87 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
 
-    <div class="d-flex justify-content-between mb-3">
-        <h3>Data Mobil</h3>
+<h2>Data Mobil Rental</h2>
 
-        <a href="{{ route('mobil.create') }}" class="btn btn-primary">
-            + Tambah Mobil
-        </a>
-    </div>
+<a href="{{ route('mobil.create') }}">
+    Tambah Mobil
+</a>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+<br><br>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>No</th>
-                <th>Nama Mobil</th>
-                <th>Merk</th>
-                <th>Plat Nomor</th>
-                <th>Tahun</th>
-                <th>Harga Sewa</th>
-                <th>Status</th>
-                <th width="200">Aksi</th>
-            </tr>
-        </thead>
+@if(session('success'))
+    <p>{{ session('success') }}</p>
+@endif
 
-        <tbody>
-            @forelse ($mobils as $mobil)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $mobil->nama_mobil }}</td>
-                <td>{{ $mobil->merk }}</td>
-                <td>{{ $mobil->plat_nomor }}</td>
-                <td>{{ $mobil->tahun }}</td>
-                <td>Rp {{ number_format($mobil->harga_sewa, 0, ',', '.') }}</td>
+<table border="1" cellpadding="10">
 
-                <td>
-                    @if($mobil->status == 'tersedia')
-                        <span class="badge bg-success">Tersedia</span>
-                    @elseif($mobil->status == 'disewa')
-                        <span class="badge bg-warning">Disewa</span>
-                    @else
-                        <span class="badge bg-danger">Service</span>
-                    @endif
-                </td>
+    <tr>
+        <th>No</th>
+        <th>Nama Mobil</th>
+        <th>Merk</th>
+        <th>Plat Nomor</th>
+        <th>Tahun</th>
+        <th>Harga Sewa</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
 
-                <td>
-                    <a href="{{ route('mobil.edit', $mobil->id) }}" 
-                       class="btn btn-warning btn-sm">
-                        Edit
-                    </a>
+    @forelse ($mobils as $mobil)
 
-                    <form action="{{ route('mobil.destroy', $mobil->id) }}" 
-                          method="POST" 
-                          class="d-inline">
+    <tr>
+        <td>{{ $loop->iteration }}</td>
 
-                        @csrf
-                        @method('DELETE')
+        <td>{{ $mobil->nama_mobil }}</td>
 
-                        <button type="submit" 
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('Yakin ingin menghapus data?')">
-                            Hapus
-                        </button>
-                    </form>
-                </td>
-            </tr>
+        <td>{{ $mobil->merk }}</td>
 
-            @empty
-            <tr>
-                <td colspan="8" class="text-center">
-                    Data mobil belum tersedia
-                </td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
+        <td>{{ $mobil->plat_nomor }}</td>
 
-</div>
+        <td>{{ $mobil->tahun }}</td>
+
+        <td>
+            Rp {{ number_format($mobil->harga_sewa, 0, ',', '.') }}
+        </td>
+
+        <td>{{ $mobil->status }}</td>
+
+        <td>
+
+            <a href="{{ route('mobil.edit', $mobil->id) }}">
+                Edit
+            </a>
+
+            |
+
+            <form action="{{ route('mobil.destroy', $mobil->id) }}"
+                  method="POST"
+                  style="display:inline;">
+
+                @csrf
+                @method('DELETE')
+
+                <button type="submit">
+                    Hapus
+                </button>
+
+            </form>
+
+        </td>
+    </tr>
+
+    @empty
+
+    <tr>
+        <td colspan="8">
+            Data mobil belum tersedia
+        </td>
+    </tr>
+
+    @endforelse
+
+</table>
+
 @endsection

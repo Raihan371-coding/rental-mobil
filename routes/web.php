@@ -10,5 +10,5 @@ Route::get('/', function () {
 });
 
 Route::resource('mobil', MobilController::class);
-Route::resource('service', ServiceController::class);
-Route::resource('booking', BookingController::class);
+// Route::resource('service', ServiceController::class);
+// Route::resource('booking', BookingController::class);

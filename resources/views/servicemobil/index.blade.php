@@ -1,45 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Service Mobil</title>
-</head>
-<body>
+@extends('layouts.admin')
 
-<h1>Data Service Mobil</h1>
+@section('title', 'Service Mobil')
 
-<a href="/service/create">+ Tambah Service</a>
+@section('content')
+<div class="rounded-4xl bg-white p-8 shadow-xl">
+    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-2xl font-semibold text-slate-950">Data Service Mobil</h1>
+            <p class="mt-2 text-sm text-slate-600">Kelola jadwal service dan catatan perawatan kendaraan.</p>
+        </div>
+        <a href="{{ route('service.create') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Tambah Service</a>
+    </div>
 
-<br><br>
-
-<table border="1" cellpadding="10">
-    <tr>
-        <th>ID</th>
-        <th>Mobil</th>
-        <th>Tanggal</th>
-        <th>Biaya</th>
-        <th>Status</th>
-    </tr>
-
-    @foreach($services as $service)
-    <tr>
-        <td>{{ $service->id }}</td>
-        <td>{{ $service->mobil->nama_mobil ?? '-' }}</td>
-        <td>{{ $service->tanggal_service }}</td>
-        <td>{{ $service->biaya_service }}</td>
-        <td>{{ $service->status_service }}</td>
-        <td>
-            <a href="/service/{{ $service->id }}/edit">Edit</a>
-
-            <form action="/service/{{ $service->id }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Hapus</button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
-
-</table>
-
-</body>
-</html>
+    <div class="overflow-x-auto rounded-3xl border border-slate-200 bg-slate-50 p-4">
+        <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-700">
+            <thead class="border-b border-slate-200 bg-white text-slate-900">
+                <tr>
+                    <th class="px-4 py-3">ID</th>
+                    <th class="px-4 py-3">Mobil</th>
+                    <th class="px-4 py-3">Tanggal</th>
+                    <th class="px-4 py-3">Biaya</th>
+                    <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+                @forelse($services as $service)
+                    <tr class="bg-white hover:bg-slate-50">
+                        <td class="px-4 py-4">{{ $service->id }}</td>
+                        <td class="px-4 py-4">{{ $service->mobil->nama_mobil ?? '-' }}</td>
+                        <td class="px-4 py-4">{{ $service->tanggal_service }}</td>
+                        <td class="px-4 py-4">{{ $service->biaya_service }}</td>
+                        <td class="px-4 py-4">{{ $service->status_service }}</td>
+                        <td class="px-4 py-4 space-x-2">
+                            <a href="{{ route('service.edit', $service->id) }}" class="inline-flex rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">Edit</a>
+                            <form action="{{ route('service.destroy', $service->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="inline-flex rounded-full bg-rose-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-rose-600">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" class="px-4 py-6 text-center text-sm text-slate-500">Data service belum tersedia</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

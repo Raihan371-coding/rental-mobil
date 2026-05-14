@@ -33,7 +33,7 @@ class DataBookingController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect('/databooking')
+        return redirect('/booking')
             ->with('success', 'Data booking berhasil ditambahkan');
     }
 
@@ -58,7 +58,7 @@ class DataBookingController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect('/databooking')
+        return redirect('/booking')
             ->with('success', 'Data booking berhasil diupdate');
     }
 
@@ -67,7 +67,7 @@ class DataBookingController extends Controller
         $booking = DataBooking::findOrFail($id);
         $booking->delete();
 
-        return redirect('/databooking')
+        return redirect('/booking')
             ->with('success', 'Data booking berhasil dihapus');
     }
 }

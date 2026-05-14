@@ -21,7 +21,7 @@ class PromoController extends Controller
     public function store(Request $request)
     {
         Promo::create($request->all());
-        return redirect()->route('promo.index');
+        return redirect()->route('promo.index')->with('success', 'Data promo berhasil ditambahkan');
     }
 
     public function edit(Promo $promo)
@@ -32,12 +32,12 @@ class PromoController extends Controller
     public function update(Request $request, Promo $promo)
     {
         $promo->update($request->all());
-        return redirect()->route('promo.index');
+        return redirect()->route('promo.index')->with('success', 'Data promo berhasil diupdate');
     }
 
     public function destroy(Promo $promo)
     {
         $promo->delete();
-        return redirect()->route('promo.index');
+        return redirect()->route('promo.index')->with('success', 'Data promo berhasil dihapus');
     }
 }

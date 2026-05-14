@@ -28,7 +28,7 @@ class PengembalianController extends Controller
 
         Pengembalian::create($validated);
 
-        return redirect()->route('pengembalian.index');
+        return redirect()->route('pengembalian.index')->with('success', 'Data pengembalian berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -50,13 +50,13 @@ class PengembalianController extends Controller
         $pengembalian = Pengembalian::findOrFail($id);
         $pengembalian->update($validated);
 
-        return redirect()->route('pengembalian.index');
+        return redirect()->route('pengembalian.index')->with('success', 'Data pengembalian berhasil diupdate');
     }
     public function destroy($id)
     {
         $pengembalian = Pengembalian::findOrFail($id);
         $pengembalian->delete();
 
-        return redirect()->route('pengembalian.index');
+        return redirect()->route('pengembalian.index')->with('success', 'Data pengembalian berhasil dihapus');
     }
 }

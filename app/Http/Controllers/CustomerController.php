@@ -21,7 +21,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         Customer::create($request->all());
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil ditambahkan');
     }
 
     public function edit(Customer $customer)
@@ -32,12 +32,12 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $customer->update($request->all());
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil diupdate');
     }
 
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()->route('customer.index');
+        return redirect()->route('customer.index')->with('success', 'Data customer berhasil dihapus');
     }
 }

@@ -19,7 +19,7 @@ class RentalController extends Controller
     public function store(Request $request)
     {
         Rental::create($request->all());
-        return redirect()->route('rental.index');
+        return redirect()->route('rental.index')->with('success', 'Data rental berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -31,12 +31,12 @@ class RentalController extends Controller
     {
         $rental = Rental::findOrFail($id);
         $rental->update($request->all());
-        return redirect()->route('rental.index');
+        return redirect()->route('rental.index')->with('success', 'Data rental berhasil diupdate');
     }
     public function destroy($id)
     {
         $rental = Rental::findOrFail($id);
         $rental->delete();
-        return redirect()->route('rental.index');
+        return redirect()->route('rental.index')->with('success', 'Data rental berhasil dihapus');
     }
 }

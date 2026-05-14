@@ -21,7 +21,7 @@ class DendaController extends Controller
     public function store(Request $request)
     {
         Denda::create($request->all());
-        return redirect()->route('denda.index');
+        return redirect()->route('denda.index')->with('success', 'Data denda berhasil ditambahkan');
     }
 
     public function edit(Denda $denda)
@@ -32,12 +32,12 @@ class DendaController extends Controller
     public function update(Request $request, Denda $denda)
     {
         $denda->update($request->all());
-        return redirect()->route('denda.index');
+        return redirect()->route('denda.index')->with('success', 'Data denda berhasil diupdate');
     }
 
     public function destroy(Denda $denda)
     {
         $denda->delete();
-        return redirect()->route('denda.index');
+        return redirect()->route('denda.index')->with('success', 'Data denda berhasil dihapus');
     }
 }

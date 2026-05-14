@@ -12,6 +12,10 @@
         <a href="{{ route('service.create') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Tambah Service</a>
     </div>
 
+    @if(session('success'))
+        <div class="mb-6 rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900">{{ session('success') }}</div>
+    @endif
+
     <div class="overflow-x-auto rounded-3xl border border-slate-200 bg-slate-50 p-4">
         <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-700">
             <thead class="border-b border-slate-200 bg-white text-slate-900">

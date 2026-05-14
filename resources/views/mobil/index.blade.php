@@ -24,7 +24,6 @@
         <th>Tahun</th>
         <th>Harga Sewa</th>
         <th>Status</th>
-        <th>Aksi</th>
     </tr>
 
     @forelse ($mobils as $mobil)

@@ -21,7 +21,7 @@
             <thead class="border-b border-slate-200 bg-white text-slate-900">
                 <tr>
                     <th class="px-4 py-3">No</th>
-                    <th class="px-4 py-3">Rental ID</th>
+                    <th class="px-4 py-3">ID Rental</th>
                     <th class="px-4 py-3">Jumlah</th>
                     <th class="px-4 py-3">Aksi</th>
                 </tr>
@@ -30,7 +30,7 @@
                 @forelse($dendas as $denda)
                 <tr class="bg-white hover:bg-slate-50">
                     <td class="px-4 py-4">{{ $loop->iteration }}</td>
-                    <td class="px-4 py-4">{{ $denda->rental_id }}</td>
+                    <td class="px-4 py-4">{{ $denda->id_rental }}</td>
                     <td class="px-4 py-4">{{ $denda->jumlah_denda }}</td>
                     <td class="px-4 py-4 space-x-2">
                         <a href="{{ route('denda.edit', $denda->id) }}" class="inline-flex rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">Edit</a>

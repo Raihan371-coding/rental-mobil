@@ -13,8 +13,8 @@
         @csrf
         <div class="grid gap-6 sm:grid-cols-2">
             <div>
-                <label for="rental_id" class="block text-sm font-semibold text-slate-700">Rental ID</label>
-                <input type="number" id="rental_id" name="rental_id" value="{{ old('rental_id') }}" class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                <label for="id_rental" class="block text-sm font-semibold text-slate-700">Rental ID</label>
+                <input type="number" id="id_rental" name="id_rental" value="{{ old('id_rental') }}" class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
             </div>
             <div>
                 <label for="jumlah_denda" class="block text-sm font-semibold text-slate-700">Jumlah Denda</label>

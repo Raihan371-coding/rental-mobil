@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dendas', function (Blueprint $table) {
             $table->id();
-        $table->foreignId('rental_id')->constrained()->onDelete('cascade');
+        $table->integer('id_rental');
         $table->integer('jumlah_denda');
         $table->text('keterangan')->nullable();
         $table->timestamps();

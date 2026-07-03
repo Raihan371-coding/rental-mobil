@@ -19,6 +19,7 @@ return new class extends Migration
             $table->year('tahun');
             $table->integer('harga_sewa');
             $table->enum('status', ['tersedia', 'disewa', 'service']);
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

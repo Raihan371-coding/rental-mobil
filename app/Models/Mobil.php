@@ -17,6 +17,7 @@ class Mobil extends Model
         'tahun',
         'harga_sewa',
         'status',
+        'foto',
     ];
 
     // Relasi ke tabel service

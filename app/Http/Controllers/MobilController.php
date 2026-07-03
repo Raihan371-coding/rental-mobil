@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mobil;
+use Illuminate\Support\Facades\Storage;
 
 class MobilController extends Controller
 {
@@ -28,7 +29,24 @@ class MobilController extends Controller
             'tahun' => $request->tahun,
             'harga_sewa' => $request->harga_sewa,
             'status' => $request->status,
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        $foto = null;
+
+    if ($request->hasFile('foto')) {
+        $foto = $request->file('foto')->store('mobil', 'public');
+    }
+
+    Mobil::create([
+        'nama_mobil' => $request->nama_mobil,
+        'merk' => $request->merk,
+        'plat_nomor' => $request->plat_nomor,
+        'tahun' => $request->tahun,
+        'harga_sewa' => $request->harga_sewa,
+        'status' => $request->status,
+        'foto' => $foto,
+    ]);
 
         return redirect('/mobil')
                 ->with('success', 'Data mobil berhasil ditambahkan');
@@ -45,6 +63,21 @@ class MobilController extends Controller
     {
         $mobil = Mobil::findOrFail($id);
 
+        $request->validate([
+        'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    $foto = $mobil->foto;
+
+    if ($request->hasFile('foto')) {
+
+        if ($mobil->foto && Storage::disk('public')->exists($mobil->foto)) {
+            Storage::disk('public')->delete($mobil->foto);
+        }
+
+        $foto = $request->file('foto')->store('mobil', 'public');
+    }
+
         $mobil->update([
             'nama_mobil' => $request->nama_mobil,
             'merk' => $request->merk,
@@ -52,6 +85,7 @@ class MobilController extends Controller
             'tahun' => $request->tahun,
             'harga_sewa' => $request->harga_sewa,
             'status' => $request->status,
+            'foto' => $foto,
         ]);
 
         return redirect('/mobil')
@@ -61,6 +95,10 @@ class MobilController extends Controller
     public function destroy(string $id)
     {
         $mobil = Mobil::findOrFail($id);
+
+        if ($mobil->foto && Storage::disk('public')->exists($mobil->foto)) {
+        Storage::disk('public')->delete($mobil->foto);
+    }
 
         $mobil->delete();
 

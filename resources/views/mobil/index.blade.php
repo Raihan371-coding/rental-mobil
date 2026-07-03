@@ -9,11 +9,15 @@
             <h1 class="text-2xl font-semibold text-slate-950">Data Mobil Rental</h1>
             <p class="mt-2 text-sm text-slate-600">Kelola daftar mobil, tarif, dan status armada di sini.</p>
         </div>
-        <a href="{{ route('mobil.create') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Tambah Mobil</a>
+        <a href="{{ route('mobil.create') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
+            Tambah Mobil
+        </a>
     </div>
 
     @if(session('success'))
-        <div class="mb-6 rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900">{{ session('success') }}</div>
+        <div class="mb-6 rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900">
+            {{ session('success') }}
+        </div>
     @endif
 
     <div class="overflow-x-auto rounded-3xl border border-slate-200 bg-slate-50 p-4">
@@ -21,6 +25,7 @@
             <thead class="border-b border-slate-200 bg-white text-slate-900">
                 <tr>
                     <th class="px-4 py-3">No</th>
+                    <th class="px-4 py-3">Foto</th>
                     <th class="px-4 py-3">Nama Mobil</th>
                     <th class="px-4 py-3">Merk</th>
                     <th class="px-4 py-3">Plat Nomor</th>
@@ -30,28 +35,57 @@
                     <th class="px-4 py-3">Aksi</th>
                 </tr>
             </thead>
+
             <tbody class="divide-y divide-slate-200">
                 @forelse ($mobils as $mobil)
                     <tr class="bg-white hover:bg-slate-50">
                         <td class="px-4 py-4">{{ $loop->iteration }}</td>
+
+                        <td class="px-4 py-4">
+                            @if($mobil->foto)
+                                <img
+                                    src="{{ asset('storage/' . $mobil->foto) }}"
+                                    alt="{{ $mobil->nama_mobil }}"
+                                    class="h-16 w-24 rounded-lg border object-cover">
+                            @else
+                                <span class="text-xs text-slate-400">
+                                    Tidak ada foto
+                                </span>
+                            @endif
+                        </td>
+
                         <td class="px-4 py-4">{{ $mobil->nama_mobil }}</td>
                         <td class="px-4 py-4">{{ $mobil->merk }}</td>
                         <td class="px-4 py-4">{{ $mobil->plat_nomor }}</td>
                         <td class="px-4 py-4">{{ $mobil->tahun }}</td>
-                        <td class="px-4 py-4">Rp {{ number_format($mobil->harga_sewa, 0, ',', '.') }}</td>
+                        <td class="px-4 py-4">
+                            Rp {{ number_format($mobil->harga_sewa, 0, ',', '.') }}
+                        </td>
                         <td class="px-4 py-4">{{ $mobil->status }}</td>
+
                         <td class="px-4 py-4 space-x-2">
-                            <a href="{{ route('mobil.edit', $mobil->id) }}" class="inline-flex rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">Edit</a>
+                            <a href="{{ route('mobil.edit', $mobil->id) }}"
+                               class="inline-flex rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">
+                                Edit
+                            </a>
+
                             <form action="{{ route('mobil.destroy', $mobil->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="inline-flex rounded-full bg-rose-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-rose-600">Hapus</button>
+
+                                <button type="submit"
+                                    class="inline-flex rounded-full bg-rose-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-rose-600"
+                                    onclick="return confirm('Yakin ingin menghapus mobil ini?')">
+                                    Hapus
+                                </button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="px-4 py-6 text-center text-sm text-slate-500">Data mobil belum tersedia</td>
+                        <td colspan="9" class="px-4 py-6 text-center text-sm text-slate-500">
+                            Data mobil belum tersedia
+                        </td>
                     </tr>
                 @endforelse
             </tbody>

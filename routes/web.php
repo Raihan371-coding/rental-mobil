@@ -10,6 +10,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\CustomerProfileController; //Customer Profile view 
 
 Route::redirect('/', '/home');
 
@@ -37,3 +38,15 @@ Route::resource('denda', DendaController::class);
 
 // Promo routes
 Route::resource('promo', PromoController::class);
+
+// Customer view routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/customer/profile', [CustomerProfileController::class, 'index'])
+        ->name('customer.profile');
+
+    Route::get('/customer/profile/edit', [CustomerProfileController::class, 'edit'])
+        ->name('customer.profile.edit');
+
+    Route::put('/customer/profile', [CustomerProfileController::class, 'update'])
+        ->name('customer.profile.update');
+});

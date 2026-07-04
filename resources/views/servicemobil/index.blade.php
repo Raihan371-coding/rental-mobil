@@ -6,7 +6,7 @@
 <div class="rounded-4xl bg-white p-8 shadow-xl">
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-            <h1 class="text-2xl font-semibold text-slate-950">Data Service Mobil</h1>
+            <h1 class="text-2xl font-semibold text-slate-950">Riwayat Service Mobil</h1>
             <p class="mt-2 text-sm text-slate-600">Kelola jadwal service dan catatan perawatan kendaraan.</p>
         </div>
         <a href="{{ route('service.create') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">Tambah Service</a>
@@ -25,6 +25,7 @@
                     <th class="px-4 py-3">Tanggal</th>
                     <th class="px-4 py-3">Biaya</th>
                     <th class="px-4 py-3">Status</th>
+                    <th>Deskripsi</th>
                     <th class="px-4 py-3">Aksi</th>
                 </tr>
             </thead>
@@ -35,6 +36,7 @@
                         <td class="px-4 py-4">{{ $service->mobil->nama_mobil ?? '-' }}</td>
                         <td class="px-4 py-4">{{ $service->tanggal_service }}</td>
                         <td class="px-4 py-4">{{ $service->biaya_service }}</td>
+                        <td>{{ $service->deskripsi }}</td>
                         <td class="px-4 py-4">{{ $service->status_service }}</td>
                         <td class="px-4 py-4 space-x-2">
                             <a href="{{ route('service.edit', $service->id) }}" class="inline-flex rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">Edit</a>

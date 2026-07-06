@@ -12,8 +12,10 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
 
-Route::redirect('/', '/dashboard');
-
+Route::redirect('/', '/welcome');
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -46,8 +46,17 @@
                             <h2 class="mt-2 text-3xl font-semibold text-slate-950">@yield('title', 'Dashboard')</h2>
                         </div>
                         <div class="flex gap-3">
-                            <a href="{{ route('home') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Beranda</a>
+                            <a href="{{ route('dashboard') }}" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800">Beranda</a>
                         </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
                     </div>
                 </header>
 

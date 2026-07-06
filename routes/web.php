@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\ServiceMobilController;
@@ -11,11 +12,11 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
 
-Route::redirect('/', '/home');
+Route::redirect('/', '/dashboard');
 
-Route::get('/home', function () {
-    return view('home.admin');
-})->name('home');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('mobil', MobilController::class);
 Route::resource('service', ServiceMobilController::class);
 Route::resource('booking', DataBookingController::class);
@@ -37,3 +38,11 @@ Route::resource('denda', DendaController::class);
 
 // Promo routes
 Route::resource('promo', PromoController::class);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';

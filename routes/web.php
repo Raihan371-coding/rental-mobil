@@ -11,7 +11,10 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
 
-Route::redirect('/', '/home');
+Route::redirect('/', '/welcome');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 
 Route::get('/home', function () {
     return view('home.admin');

@@ -3,6 +3,7 @@
 @section('title', 'Rental Mobil - Home')
 
 @section('content')
+{{-- Hero Section --}}
 	<section class="bg-white">
 		<div class="max-w-7xl mx-auto px-4 py-20 sm:px-6 lg:px-8 text-center">
 			<h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">Sewa Mobil Mudah dan Cepat</h1>
@@ -14,6 +15,7 @@
 		</div>
 	</section>
 
+	{{-- Features Section --}}
 	<section id="features" class="bg-gray-50">
 		<div class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
 			<h2 class="text-2xl font-semibold text-gray-900">Kenapa Memilih Kami</h2>
@@ -34,6 +36,7 @@
 		</div>
 	</section>
 
+	{{-- Fleet Section --}}
 	<section id="fleet" class="bg-white">
 		<div class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
 			<h2 class="text-2xl font-semibold text-gray-900">Armada Kami</h2>
@@ -58,6 +61,7 @@
 		</div>
 	</section>
 
+	{{-- Pricing Section --}}
 	<section id="pricing" class="bg-gray-50">
 		<div class="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 text-center">
 			<h2 class="text-2xl font-semibold text-gray-900">Paket Harga</h2>

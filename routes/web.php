@@ -18,7 +18,7 @@ Route::get('/welcome', function () {
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
 Route::resource('mobil', MobilController::class);
 Route::resource('service', ServiceMobilController::class);
 Route::resource('booking', DataBookingController::class);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 test('login screen can be rendered', function () {
     $response = $this->get('/login');
@@ -8,7 +9,7 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
+test('regular users are redirected to welcome after authentication', function () {
     $user = User::factory()->create();
 
     $response = $this->post('/login', [
@@ -16,7 +17,22 @@ test('users can authenticate using the login screen', function () {
         'password' => 'password',
     ]);
 
-    $this->assertAuthenticated();
+    $this->assertAuthenticatedAs($user);
+    $response->assertRedirect('/welcome');
+});
+
+test('admins are redirected to dashboard after authentication', function () {
+    $user = User::factory()->create([
+        'email' => 'admin@example.com',
+        'password' => Hash::make('password'),
+    ]);
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticatedAs($user);
     $response->assertRedirect(route('dashboard', absolute: false));
 });
 
@@ -29,6 +45,26 @@ test('users can not authenticate with invalid password', function () {
     ]);
 
     $this->assertGuest();
+});
+
+test('regular users cannot access the dashboard', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)->get('/dashboard');
+
+    $response->assertStatus(403);
+    $response->assertSee('Akses Ditolak');
+});
+
+test('admins can access the dashboard', function () {
+    $user = User::factory()->create([
+        'email' => 'admin@example.com',
+        'password' => Hash::make('password'),
+    ]);
+
+    $response = $this->actingAs($user)->get('/dashboard');
+
+    $response->assertOk();
 });
 
 test('users can logout', function () {

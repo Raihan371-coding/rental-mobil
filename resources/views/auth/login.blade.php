@@ -1,53 +1,126 @@
-@extends('layouts.landing')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('title', 'Login')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentify Login</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
 
-@section('content')
-  <div class="max-w-3xl mx-auto mt-16 grid gap-10 lg:grid-cols-[1.3fr_1fr] items-center">
-    <div class="rounded-3xl bg-gradient-to-br from-blue-600 to-cyan-500 p-10 text-white shadow-xl">
-      <h1 class="text-4xl font-bold">Selamat datang kembali!</h1>
-      <p class="mt-4 text-lg text-blue-100/90">Masuk untuk mengelola pemesanan dan melihat armada terbaru kami.</p>
-      <div class="mt-8 rounded-3xl bg-white/10 p-6">
-        <p class="font-semibold">Kamu bisa login dengan email dan password yang sudah terdaftar.</p>
-      </div>
+<body class="bg-gray-100">
+
+    <div class="min-h-screen flex">
+
+        <!-- LEFT -->
+        <div class="hidden lg:block w-1/2 relative">
+
+            <!-- Background -->
+            <img src="{{ asset('build/assets/images/car.jpg ') }}" class="absolute inset-0 w-full h-full object-cover">
+
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-slate-900/55"></div>
+
+            <!-- Content -->
+            <div class="absolute bottom-16 left-10 text-white max-w-md">
+
+                <h3 class="text-2xl font-bold">
+                    Rentify
+                </h3>
+
+                <h1 class="mt-2 text-5xl font-extrabold leading-tight">
+                    Temukan Kebebasan <br>
+                    di Setiap Perjalanan
+                </h1>
+
+                <p class="mt-6 text-lg text-gray-200">
+                    Nikmati kenyamanan berkendara dengan pilihan armada terbaik
+                    dan proses pemesanan yang transparan.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="w-full lg:w-1/2 flex justify-center items-center bg-gray-100 px-6">
+
+            <div class="bg-white rounded-xl shadow-lg w-full max-w-md p-8">
+
+                <!-- Tabs -->
+                <div class="mb-8 flex border-b">
+                    <a href="{{ route('login') }}"
+                        class="flex-1 border-b-2 border-blue-600 py-3 text-center text-sm font-semibold text-blue-700">
+                        LOGIN
+                    </a>
+
+                    <a href="{{ route('register') }}"
+                        class="flex-1 py-3 text-center text-sm text-gray-400 transition hover:text-blue-700">
+                        REGISTER
+                    </a>
+                </div>
+
+                <h2 class="text-2xl font-bold">
+                    Selamat Datang Kembali
+                </h2>
+
+                <p class="text-gray-500 mt-2 mb-6">
+                    Silakan masuk ke akun Rentify Anda.
+                </p>
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <!-- Email -->
+                    <div class="mb-5">
+
+                        <label class="text-sm font-medium">
+                            Email
+                        </label>
+
+                        <input type="email" name="email" placeholder="contoh@email.com"
+                            class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-5">
+
+                        <label class="text-sm font-medium">
+                            Password
+                        </label>
+
+                        <input type="password" name="password" placeholder="********"
+                            class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-blue-400 focus:outline-none">
+
+                    </div>
+
+                    <div class="flex justify-between items-center text-sm mb-6">
+
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox">
+                            Ingat saya
+                        </label>
+
+                        <a href="#" class="text-blue-600 hover:underline">
+                            Lupa password?
+                        </a>
+
+                    </div>
+
+                    <button
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-3 font-semibold transition">
+                        Login →
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="rounded-3xl bg-white p-10 shadow-xl border border-gray-200">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <h2 class="text-2xl font-semibold text-gray-900">Login</h2>
-          <p class="mt-1 text-sm text-gray-500">Masukkan kredensial untuk melanjutkan.</p>
-        </div>
-        <a href="{{ route('register') }}" class="inline-flex items-center gap-2 rounded-full border border-blue-600 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100">Daftar</a>
-      </div>
+</body>
 
-      <form method="POST" action="{{ route('login') }}" class="space-y-5">
-        @csrf
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" name="email" value="{{ old('email') }}" required autofocus class="mt-2 w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-          @error('email') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Password</label>
-          <input type="password" name="password" required class="mt-2 w-full rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200">
-          @error('password') <p class="mt-2 text-sm text-red-600">{{ $message }}</p> @enderror
-        </div>
-
-        <div class="flex items-center justify-between text-sm text-gray-500">
-          <label class="inline-flex items-center gap-2">
-            <input type="checkbox" name="remember" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
-            Remember me
-          </label>
-          @if(Route::has('password.request'))
-            <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-700">Lupa password?</a>
-          @endif
-        </div>
-
-        <button type="submit" class="w-full rounded-2xl bg-blue-600 px-5 py-3 text-base font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-700">Masuk</button>
-      </form>
-    </div>
-  </div>
-@endsection
+</html>

@@ -2,7 +2,7 @@
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16 items-center ">
       <div class="flex items-start ">
-        <a href="{{ url('/') }}" class="text-xl font-semibold text-blue-600">RentEase</a>
+        <a href="{{ url('/') }}" class="text-xl font-semibold text-blue-600">Rentify</a>
       </div>
       <div class="hidden md:flex items-center space-x-4">
 

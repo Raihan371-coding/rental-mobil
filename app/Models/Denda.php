@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Denda extends Model
 {
     protected $fillable = [
-    'id_rental',
-    'jumlah_denda',
-    'keterangan'
-];
+        'id_rental',
+        'jumlah_denda',
+        'keterangan'
+    ];
 
-public function rental()
-{
-    return $this->belongsTo(Rental::class);
-}
+    public function rental()
+    {
+        return $this->belongsTo(Rental::class, 'id_rental');
+    }
 }

@@ -12,35 +12,94 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
 
+// Landing page (public)
 Route::redirect('/', '/welcome');
 Route::get('/welcome', function () {
     return view('welcome');
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
-Route::resource('mobil', MobilController::class);
-Route::resource('service', ServiceMobilController::class);
-Route::resource('booking', DataBookingController::class);
 
-// Pengembalian routes
-Route::resource('pengembalian', PengembalianController::class);
+/*
+|--------------------------------------------------------------------------
+| Admin Routes — prefix: /admin, middleware: auth + admin
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->name('admin.')->group(function () {
 
-// Rental routes
-Route::resource('rental', RentalController::class);
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 
-// Pembayaran routes
-Route::resource('pembayaran', PembayaranController::class);
+    // Mobil CRUD
+    Route::resource('mobil', MobilController::class);
 
-// Customer routes
-Route::resource('customer', CustomerController::class);
+    // Service CRUD
+    Route::resource('service', ServiceMobilController::class);
 
-// Denda routes
-Route::resource('denda', DendaController::class);
+    // Booking CRUD
+    Route::resource('booking', DataBookingController::class)->parameters(['booking' => 'booking']);
 
-// Promo routes
-Route::resource('promo', PromoController::class);
+    // Pengembalian CRUD
+    Route::resource('pengembalian', PengembalianController::class);
 
+    // Rental CRUD
+    Route::resource('rental', RentalController::class);
+
+    // Pembayaran CRUD
+    Route::resource('pembayaran', PembayaranController::class);
+
+    // Customer CRUD
+    Route::resource('customer', CustomerController::class);
+
+    // Denda CRUD
+    Route::resource('denda', DendaController::class);
+
+    // Promo CRUD
+    Route::resource('promo', PromoController::class);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Customer Routes — prefix: /customer, middleware: auth
+|--------------------------------------------------------------------------
+*/
+Route::prefix('customer')->middleware(['auth'])->name('customer.')->group(function () {
+
+    // Dashboard
+    Route::get('/dashboard', function () {
+        return view('customer.dashboard');
+    })->name('dashboard');
+
+    // Katalog Mobil (read-only)
+    Route::get('/mobil', [MobilController::class, 'customerIndex'])->name('mobil.index');
+
+    // Booking (index, create, store, edit, update, destroy)
+    Route::resource('booking', DataBookingController::class)->parameters(['booking' => 'booking']);
+
+    // Rental (index only)
+    Route::get('/rental', [RentalController::class, 'customerIndex'])->name('rental.index');
+
+    // Pengembalian (index only)
+    Route::get('/pengembalian', [PengembalianController::class, 'customerIndex'])->name('pengembalian.index');
+
+    // Pembayaran (index only)
+    Route::get('/pembayaran', [PembayaranController::class, 'customerIndex'])->name('pembayaran.index');
+
+    // Denda (index only)
+    Route::get('/denda', [DendaController::class, 'customerIndex'])->name('denda.index');
+
+    // Promo (index only)
+    Route::get('/promo', [PromoController::class, 'customerIndex'])->name('promo.index');
+
+    // Profile
+    Route::get('/profile', [CustomerController::class, 'profile'])->name('profile');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Auth Profile Routes
+|--------------------------------------------------------------------------
+*/
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

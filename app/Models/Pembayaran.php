@@ -14,4 +14,9 @@ class Pembayaran extends Model
         'jumlah_bayar',
         'status_bayar',
     ];
+
+    public function rental()
+    {
+        return $this->belongsTo(Rental::class, 'id_rental');
+    }
 }

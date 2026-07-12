@@ -12,16 +12,32 @@ class MobilController extends Controller
     {
         $mobils = Mobil::all();
 
-        return view('mobil.index', compact('mobils'));
+        return view('admin.mobil.index', compact('mobils'));
+    }
+
+    /**
+     * Customer: read-only katalog mobil
+     */
+    public function customerIndex()
+    {
+        $mobils = Mobil::all();
+
+        return view('customer.mobil.index', compact('mobils'));
     }
 
     public function create()
     {
-        return view('mobil.create');
+        return view('admin.mobil.create');
     }
 
     public function store(Request $request)
     {
+        $foto = null;
+
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto')->store('mobil', 'public');
+        }
+
         Mobil::create([
             'nama_mobil' => $request->nama_mobil,
             'merk' => $request->merk,
@@ -29,26 +45,10 @@ class MobilController extends Controller
             'tahun' => $request->tahun,
             'harga_sewa' => $request->harga_sewa,
             'status' => $request->status,
-            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'foto' => $foto,
         ]);
 
-        $foto = null;
-
-    if ($request->hasFile('foto')) {
-        $foto = $request->file('foto')->store('mobil', 'public');
-    }
-
-    Mobil::create([
-        'nama_mobil' => $request->nama_mobil,
-        'merk' => $request->merk,
-        'plat_nomor' => $request->plat_nomor,
-        'tahun' => $request->tahun,
-        'harga_sewa' => $request->harga_sewa,
-        'status' => $request->status,
-        'foto' => $foto,
-    ]);
-
-        return redirect('/mobil')
+        return redirect()->route('admin.mobil.index')
                 ->with('success', 'Data mobil berhasil ditambahkan');
     }
 
@@ -56,7 +56,7 @@ class MobilController extends Controller
     {
         $mobil = Mobil::findOrFail($id);
 
-        return view('mobil.edit', compact('mobil'));
+        return view('admin.mobil.edit', compact('mobil'));
     }
 
     public function update(Request $request, string $id)
@@ -64,19 +64,18 @@ class MobilController extends Controller
         $mobil = Mobil::findOrFail($id);
 
         $request->validate([
-        'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    $foto = $mobil->foto;
+        $foto = $mobil->foto;
 
-    if ($request->hasFile('foto')) {
+        if ($request->hasFile('foto')) {
+            if ($mobil->foto && Storage::disk('public')->exists($mobil->foto)) {
+                Storage::disk('public')->delete($mobil->foto);
+            }
 
-        if ($mobil->foto && Storage::disk('public')->exists($mobil->foto)) {
-            Storage::disk('public')->delete($mobil->foto);
+            $foto = $request->file('foto')->store('mobil', 'public');
         }
-
-        $foto = $request->file('foto')->store('mobil', 'public');
-    }
 
         $mobil->update([
             'nama_mobil' => $request->nama_mobil,
@@ -88,7 +87,7 @@ class MobilController extends Controller
             'foto' => $foto,
         ]);
 
-        return redirect('/mobil')
+        return redirect()->route('admin.mobil.index')
                 ->with('success', 'Data mobil berhasil diupdate');
     }
 
@@ -97,12 +96,12 @@ class MobilController extends Controller
         $mobil = Mobil::findOrFail($id);
 
         if ($mobil->foto && Storage::disk('public')->exists($mobil->foto)) {
-        Storage::disk('public')->delete($mobil->foto);
-    }
+            Storage::disk('public')->delete($mobil->foto);
+        }
 
         $mobil->delete();
 
-        return redirect('/mobil')
+        return redirect()->route('admin.mobil.index')
                 ->with('success', 'Data mobil berhasil dihapus');
     }
 }

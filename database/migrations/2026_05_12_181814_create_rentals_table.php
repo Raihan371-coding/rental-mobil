@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
             $table->integer('id_rental')->unsigned();
-            $table->integer('id_customer')->unsigned();
-            $table->integer('id_mobil')->unsigned();
+            $table->foreignId('id_customer')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('id_mobil')->constrained('mobils')->onDelete('cascade');
             $table->date('tanggal_rental');
             $table->date('tanggal_kembali');
             $table->decimal('total_harga', 10, 2);

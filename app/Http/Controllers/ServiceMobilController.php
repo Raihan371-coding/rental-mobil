@@ -12,14 +12,14 @@ class ServiceMobilController extends Controller
     {
         $services = ServiceMobil::with('mobil')->get();
 
-        return view('servicemobil.index', compact('services'));
+        return view('admin.service.index', compact('services'));
     }
 
     public function create()
     {
         $mobils = Mobil::all();
 
-        return view('servicemobil.create', compact('mobils'));
+        return view('admin.service.create', compact('mobils'));
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class ServiceMobilController extends Controller
             'status_service' => $request->status_service,
         ]);
 
-        return redirect('/service')
+        return redirect()->route('admin.service.index')
                 ->with('success', 'Data service berhasil ditambahkan');
     }
 
@@ -42,7 +42,7 @@ class ServiceMobilController extends Controller
 
         $mobils = Mobil::all();
 
-        return view('servicemobil.edit', compact('service', 'mobils'));
+        return view('admin.service.edit', compact('service', 'mobils'));
     }
 
     public function update(Request $request, string $id)
@@ -57,7 +57,7 @@ class ServiceMobilController extends Controller
             'status_service' => $request->status_service,
         ]);
 
-        return redirect('/service')
+        return redirect()->route('admin.service.index')
                 ->with('success', 'Data service berhasil diupdate');
     }
 
@@ -67,7 +67,7 @@ class ServiceMobilController extends Controller
 
         $service->delete();
 
-        return redirect('/service')
+        return redirect()->route('admin.service.index')
                 ->with('success', 'Data service berhasil dihapus');
     }
 }

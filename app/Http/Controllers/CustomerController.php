@@ -3,41 +3,74 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Customer;
+use App\Models\User;
 
 class CustomerController extends Controller
 {
     public function index()
     {
         $customers = Customer::all();
-        return view('customer.index', compact('customers'));
+        return view('admin.customer.index', compact('customers'));
     }
 
     public function create()
     {
-        return view('customer.create');
+        $users = User::all();
+
+        return view('admin.customer.create', compact('users'));
     }
 
     public function store(Request $request)
     {
-        Customer::create($request->all());
-        return redirect()->route('customer.index')->with('success', 'Data customer berhasil ditambahkan');
+        $validated = $request->validate([
+            'user_id' => 'nullable|exists:users,id',
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
+            'no_identitas' => 'nullable|string|max:255',
+            'no_telp' => 'required|string|max:50',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        Customer::create($validated);
+
+        return redirect()->route('admin.customer.index')->with('success', 'Data customer berhasil ditambahkan');
     }
 
     public function edit(Customer $customer)
     {
-        return view('customer.edit', compact('customer'));
+        $users = User::all();
+
+        return view('admin.customer.edit', compact('customer', 'users'));
     }
 
     public function update(Request $request, Customer $customer)
     {
-        $customer->update($request->all());
-        return redirect()->route('customer.index')->with('success', 'Data customer berhasil diupdate');
+        $validated = $request->validate([
+            'user_id' => 'nullable|exists:users,id',
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
+            'no_identitas' => 'nullable|string|max:255',
+            'no_telp' => 'required|string|max:50',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        $customer->update($validated);
+
+        return redirect()->route('admin.customer.index')->with('success', 'Data customer berhasil diupdate');
     }
 
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()->route('customer.index')->with('success', 'Data customer berhasil dihapus');
+        return redirect()->route('admin.customer.index')->with('success', 'Data customer berhasil dihapus');
+    }
+
+    public function profile()
+    {
+        $customer = Auth::user()?->customer;
+
+        return view('customer.profile', compact('customer'));
     }
 }

@@ -13,4 +13,9 @@ class Pengembalian extends Model
         'denda',
         'keterangan',
     ];
+
+    public function rental()
+    {
+        return $this->belongsTo(Rental::class, 'id_rental');
+    }
 }

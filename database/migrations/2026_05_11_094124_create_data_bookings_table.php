@@ -10,21 +10,15 @@ return new class extends Migration
     {
         Schema::create('data_bookings', function (Blueprint $table) {
             $table->id();
-
             $table->string('nama_pelanggan');
-
+            $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');
             $table->foreignId('mobil_id')
                 ->constrained('mobils')
                 ->onDelete('cascade');
-
             $table->date('tanggal_booking');
-
             $table->time('jam_booking');
-
-            $table->enum('status', ['pending', 'diproses', 'selesai'])->default('pending');
-
+            $table->enum('status', ['menunggu konfirmasi', 'terkonfirmasi', 'ditolak'])->default('menunggu konfirmasi');
             $table->text('keterangan')->nullable();
-
             $table->timestamps();
         });
     }

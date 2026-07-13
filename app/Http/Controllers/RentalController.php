@@ -29,7 +29,12 @@ class RentalController extends Controller
 
     public function index()
     {
-        $data = Rental::all();
+        $data = Rental::with([
+            'booking',
+            'customer',
+            'mobil'
+        ])->get();
+
         return view('admin.rental.index', compact('data'));
     }
 
@@ -46,27 +51,36 @@ class RentalController extends Controller
 
     public function create()
     {
+        $bookings = DataBooking::all();
         $customers = Customer::all();
         $mobils = Mobil::all();
-        $bookings = DataBooking::all();
 
-        return view('admin.rental.create', compact('customers', 'mobils', 'bookings'));
+        return view('admin.rental.create', compact(
+            'bookings',
+            'customers',
+            'mobils'
+        ));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'id_rental' => 'required|string|max:255|unique:rentals,id_rental',
             'id_customer' => 'required|exists:customers,id',
             'id_mobil' => 'required|exists:mobils,id',
             'booking_id' => 'nullable|exists:data_bookings,id',
             'tanggal_rental' => 'required|date',
             'tanggal_kembali' => 'nullable|date|after_or_equal:tanggal_rental',
             'total_harga' => 'required|numeric|min:0',
-            'status' => 'required|in:berjalan,selesai',
+            'status' => 'required|in:rental,kembali',
         ]);
 
         Rental::create($validated);
+
+        $rental = Rental::create($validated);
+
+        $rental->mobil->update([
+            'status' => 'disewa'
+        ]);
 
         return redirect()->route('admin.rental.index')->with('success', 'Data rental berhasil ditambahkan');
     }
@@ -86,16 +100,26 @@ class RentalController extends Controller
         $rental = Rental::findOrFail($id);
 
         $validated = $request->validate([
-            'id_rental' => 'required|string|max:255|unique:rentals,id_rental,' . $rental->id,
             'id_customer' => 'required|exists:customers,id',
             'id_mobil' => 'required|exists:mobils,id',
             'booking_id' => 'nullable|exists:data_bookings,id',
             'tanggal_rental' => 'required|date',
             'tanggal_kembali' => 'nullable|date|after_or_equal:tanggal_rental',
             'total_harga' => 'required|numeric|min:0',
-            'status' => 'required|in:berjalan,selesai',
+            'status' => 'required|in:rental,kembali',
         ]);
 
+        // mobil lama kembali tersedia
+        if ($rental->id_mobil != $validated['id_mobil']) {
+
+            Mobil::find($rental->id_mobil)?->update([
+                'status' => 'tersedia'
+            ]);
+
+            Mobil::find($validated['id_mobil'])?->update([
+                'status' => 'disewa'
+            ]);
+        }
         $rental->update($validated);
 
         return redirect()->route('admin.rental.index')->with('success', 'Data rental berhasil diupdate');
@@ -104,7 +128,15 @@ class RentalController extends Controller
     public function destroy($id)
     {
         $rental = Rental::findOrFail($id);
+
+        $rental->mobil->update([
+            'status' => 'tersedia'
+        ]);
+
         $rental->delete();
-        return redirect()->route('admin.rental.index')->with('success', 'Data rental berhasil dihapus');
+
+        return redirect()
+            ->route('admin.rental.index')
+            ->with('success', 'Data rental berhasil dihapus');
     }
 }

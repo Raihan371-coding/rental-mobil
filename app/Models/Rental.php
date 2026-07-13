@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasKode;
 
 class Rental extends Model
 {
+    use HasKode;
+
+    protected $prefix = 'RNT';
+    protected $kodeField = 'kode_rental';
     protected $fillable = [
-        'id_rental',
+        'kode_rental',
         'id_customer',
         'id_mobil',
         'booking_id',

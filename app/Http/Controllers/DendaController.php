@@ -33,7 +33,9 @@ class DendaController extends Controller
 
     public function create()
     {
-        return view('admin.denda.create');
+
+        $rentals = Rental::all();
+        return view('admin.denda.create', compact('rentals'));
     }
 
     public function store(Request $request)

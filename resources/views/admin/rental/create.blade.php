@@ -13,18 +13,14 @@
             @csrf
             <div class="grid gap-6 sm:grid-cols-2">
                 <div>
-                    <label for="id_rental" class="block text-sm font-semibold text-slate-700">ID Rental</label>
-                    <input type="text" id="id_rental" name="id_rental" value="{{ old('id_rental') }}"
-                        class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
-                </div>
-                <div>
                     <label for="id_customer" class="block text-sm font-semibold text-slate-700">Customer</label>
                     <select id="id_customer" name="id_customer"
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                         <option value="">Pilih customer</option>
                         @foreach ($customers as $customer)
-                            <option value="{{ $customer->id }}" {{ old('id_customer') == $customer->id ? 'selected' : '' }}>
-                                {{ $customer->nama }} - {{ $customer->email }}</option>
+                            <option value="{{ $customer->id }}">
+                                {{ $customer->kode_customer }} - {{ $customer->nama }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -34,8 +30,9 @@
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                         <option value="">Pilih mobil</option>
                         @foreach ($mobils as $mobil)
-                            <option value="{{ $mobil->id }}" {{ old('id_mobil') == $mobil->id ? 'selected' : '' }}>
-                                {{ $mobil->nama_mobil }}</option>
+                            <option value="{{ $mobil->id }}">
+                                {{ $mobil->kode_mobil }} - {{ $mobil->nama_mobil }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -46,7 +43,10 @@
                         <option value="">Tidak terhubung ke booking</option>
                         @foreach ($bookings as $booking)
                             <option value="{{ $booking->id }}" {{ old('booking_id') == $booking->id ? 'selected' : '' }}>
-                                #{{ $booking->id }} - {{ $booking->nama_pelanggan }}</option>
+                                {{ $booking->kode_booking }} - {{ $booking->customer->nama }} -
+                                {{ $booking->mobil->nama_mobil }}
+                                {{ \Carbon\Carbon::parse($booking->tanggal_booking)->format('d/m/Y') }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -70,8 +70,8 @@
                     <label for="status" class="block text-sm font-semibold text-slate-700">Status</label>
                     <select id="status" name="status"
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
-                        <option value="berjalan" {{ old('status') == 'berjalan' ? 'selected' : '' }}>Berjalan</option>
-                        <option value="selesai" {{ old('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="rental" {{ old('status') == 'rental' ? 'selected' : '' }}>Rental</option>
+                        <option value="kembali" {{ old('status') == 'kembali' ? 'selected' : '' }}>Kembali</option>
                     </select>
                 </div>
             </div>

@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('data_bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_booking')->unique();
             $table->string('nama_pelanggan');
             $table->foreignId('customer_id')->nullable()->constrained('customers')->onDelete('set null');
             $table->foreignId('mobil_id')

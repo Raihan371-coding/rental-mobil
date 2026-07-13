@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('promos', function (Blueprint $table) {
-           $table->id();
-        $table->string('kode_promo');
-        $table->integer('potongan');
-        $table->date('tanggal_mulai');
-        $table->date('tanggal_selesai');
-        $table->timestamps();
+            $table->id();
+            $table->string('kode_promo')->unique();
+            $table->integer('potongan');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_selesai');
+            $table->timestamps();
         });
     }
 

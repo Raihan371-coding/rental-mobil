@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('service_mobils', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_service')->unique();
             $table->foreignId('mobil_id')->constrained('mobils')->onDelete('cascade');
             $table->date('tanggal_service');
             $table->integer('biaya_service');

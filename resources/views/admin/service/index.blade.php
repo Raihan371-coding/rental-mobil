@@ -20,7 +20,8 @@
         <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-700">
             <thead class="border-b border-slate-200 bg-white text-slate-900">
                 <tr>
-                    <th class="px-4 py-3">ID</th>
+                    <th class="px-4 py-3">No</th>
+                    <th class="px-4 py-3">Kode Service</th>
                     <th class="px-4 py-3">Mobil</th>
                     <th class="px-4 py-3">Tanggal</th>
                     <th class="px-4 py-3">Biaya</th>
@@ -31,7 +32,8 @@
             <tbody class="divide-y divide-slate-200">
                 @forelse($services as $service)
                     <tr class="bg-white hover:bg-slate-50">
-                        <td class="px-4 py-4">{{ $service->id }}</td>
+                        <td class="px-4 py-4">{{ $loop->iteration }}</td>
+                        <td class="px-4 py-4">{{ $service->kode_service }}</td>
                         <td class="px-4 py-4">{{ $service->mobil->nama_mobil ?? '-' }}</td>
                         <td class="px-4 py-4">{{ $service->tanggal_service }}</td>
                         <td class="px-4 py-4">{{ $service->biaya_service }}</td>

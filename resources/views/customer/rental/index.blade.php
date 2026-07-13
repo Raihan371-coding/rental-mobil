@@ -14,7 +14,7 @@
                 <table class="min-w-full divide-y divide-slate-200 text-sm text-slate-700">
                     <thead class="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
                         <tr>
-                            <th class="px-4 py-3">ID Rental</th>
+                            <th class="px-4 py-3">Kode Rental</th>
                             <th class="px-4 py-3">Mobil</th>
                             <th class="px-4 py-3">Tanggal Rental</th>
                             <th class="px-4 py-3">Tanggal Kembali</th>
@@ -24,7 +24,7 @@
                     <tbody class="divide-y divide-slate-200 bg-white">
                         @forelse($data as $rental)
                             <tr>
-                                <td class="px-4 py-3">{{ $rental->id_rental }}</td>
+                                <td class="px-4 py-3">{{ $rental->kode_rental }}</td>
                                 <td class="px-4 py-3">{{ $rental->mobil?->nama_mobil ?? 'N/A' }}</td>
                                 <td class="px-4 py-3">{{ optional($rental->tanggal_rental)->format('d M Y') }}</td>
                                 <td class="px-4 py-3">{{ optional($rental->tanggal_kembali)->format('d M Y') ?? '-' }}</td>

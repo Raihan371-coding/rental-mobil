@@ -26,6 +26,7 @@
                 <tr>
                     <th class="px-4 py-3">No</th>
                     <th class="px-4 py-3">Foto</th>
+                    <th class="px-4 py-3">Kode Mobil</th>
                     <th class="px-4 py-3">Nama Mobil</th>
                     <th class="px-4 py-3">Merk</th>
                     <th class="px-4 py-3">Plat Nomor</th>
@@ -53,7 +54,7 @@
                                 </span>
                             @endif
                         </td>
-
+                        <td class="px-4 py-4">{{ $mobil->kode_mobil }}</td>
                         <td class="px-4 py-4">{{ $mobil->nama_mobil }}</td>
                         <td class="px-4 py-4">{{ $mobil->merk }}</td>
                         <td class="px-4 py-4">{{ $mobil->plat_nomor }}</td>

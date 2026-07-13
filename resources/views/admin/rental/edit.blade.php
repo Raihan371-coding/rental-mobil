@@ -14,9 +14,12 @@
             @method('PUT')
             <div class="grid gap-6 sm:grid-cols-2">
                 <div>
-                    <label for="id_rental" class="block text-sm font-semibold text-slate-700">ID Rental</label>
-                    <input type="text" id="id_rental" name="id_rental" value="{{ $data->id_rental }}"
-                        class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                    <label for="kode_rental" class="block text-sm font-semibold text-slate-700">
+                        Kode Rental
+                    </label>
+
+                    <input type="text" id="kode_rental" value="{{ $data->kode_rental }}" readonly
+                        class="mt-2 block w-full rounded-lg border border-slate-300 bg-slate-100 px-3 py-2 text-sm text-slate-600">
                 </div>
                 <div>
                     <label for="id_customer" class="block text-sm font-semibold text-slate-700">Customer</label>
@@ -26,7 +29,8 @@
                         @foreach ($customers as $customer)
                             <option value="{{ $customer->id }}"
                                 {{ old('id_customer', $data->id_customer) == $customer->id ? 'selected' : '' }}>
-                                {{ $customer->nama }} - {{ $customer->email }}</option>
+                                {{ $customer->kode_customer }} - {{ $customer->nama }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -38,7 +42,8 @@
                         @foreach ($mobils as $mobil)
                             <option value="{{ $mobil->id }}"
                                 {{ old('id_mobil', $data->id_mobil) == $mobil->id ? 'selected' : '' }}>
-                                {{ $mobil->nama_mobil }}</option>
+                                {{ $mobil->kode_mobil }} - {{ $mobil->nama_mobil }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -50,32 +55,41 @@
                         @foreach ($bookings as $booking)
                             <option value="{{ $booking->id }}"
                                 {{ old('booking_id', $data->booking_id) == $booking->id ? 'selected' : '' }}>
-                                #{{ $booking->id }} - {{ $booking->nama_pelanggan }}</option>
+
+                                {{ $booking->kode_booking }}
+                                -
+                                {{ $booking->customer->nama }}
+                                -
+                                {{ $booking->mobil->nama_mobil }}
+
+                            </option>
                         @endforeach
                     </select>
                 </div>
                 <div>
                     <label for="tanggal_rental" class="block text-sm font-semibold text-slate-700">Tanggal Rental</label>
-                    <input type="date" id="tanggal_rental" name="tanggal_rental" value="{{ $data->tanggal_rental }}"
+                    <input type="date" id="tanggal_rental" name="tanggal_rental"
+                        value="{{ old('tanggal_rental', $data->tanggal_rental) }}"
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                 </div>
                 <div>
                     <label for="tanggal_kembali" class="block text-sm font-semibold text-slate-700">Tanggal Kembali</label>
-                    <input type="date" id="tanggal_kembali" name="tanggal_kembali" value="{{ $data->tanggal_kembali }}"
+                    <input type="date" id="tanggal_kembali" name="tanggal_kembali"
+                        value="{{ old('tanggal_kembali', $data->tanggal_kembali) }}"
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                 </div>
                 <div>
                     <label for="total_harga" class="block text-sm font-semibold text-slate-700">Total Harga</label>
                     <input type="number" step="0.01" id="total_harga" name="total_harga"
-                        value="{{ $data->total_harga }}"
+                        value="{{ old('total_harga', $data->total_harga) }}"
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
                 </div>
                 <div class="sm:col-span-2">
                     <label for="status" class="block text-sm font-semibold text-slate-700">Status</label>
                     <select id="status" name="status"
                         class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
-                        <option value="berjalan" {{ $data->status == 'berjalan' ? 'selected' : '' }}>Berjalan</option>
-                        <option value="selesai" {{ $data->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                        <option value="rental" {{ $data->status == 'rental' ? 'selected' : '' }}>Rental</option>
+                        <option value="kembali" {{ $data->status == 'kembali' ? 'selected' : '' }}>Kembali</option>
                     </select>
                 </div>
             </div>

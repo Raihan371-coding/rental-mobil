@@ -56,6 +56,15 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->name('admin.'
 
     // Promo CRUD
     Route::resource('promo', PromoController::class);
+    Route::put(
+        '/pembayaran/{id}/terima',
+        [PembayaranController::class, 'terima']
+    )->name('pembayaran.terima');
+
+    Route::put(
+        '/pembayaran/{id}/tolak',
+        [PembayaranController::class, 'tolak']
+    )->name('pembayaran.tolak');
 });
 
 /*
@@ -82,8 +91,15 @@ Route::prefix('customer')->middleware(['auth'])->name('customer.')->group(functi
     // Pengembalian (index only)
     Route::get('/pengembalian', [PengembalianController::class, 'customerIndex'])->name('pengembalian.index');
 
-    // Pembayaran (index only)
-    Route::get('/pembayaran', [PembayaranController::class, 'customerIndex'])->name('pembayaran.index');
+    // Pembayaran Customer
+    Route::get('/pembayaran', [PembayaranController::class, 'customerIndex'])
+        ->name('pembayaran.index');
+
+    Route::get('/pembayaran/{id}', [PembayaranController::class, 'showCustomer'])
+        ->name('pembayaran.show');
+
+    Route::post('/pembayaran/{id}/upload', [PembayaranController::class, 'uploadBukti'])
+        ->name('pembayaran.upload');
 
     // Denda (index only)
     Route::get('/denda', [DendaController::class, 'customerIndex'])->name('denda.index');
@@ -93,6 +109,7 @@ Route::prefix('customer')->middleware(['auth'])->name('customer.')->group(functi
 
     // Profile
     Route::get('/profile', [CustomerController::class, 'profile'])->name('profile');
+    Route::post('/profile', [CustomerController::class, 'updateProfile'])->name('profile.update');
 });
 
 /*

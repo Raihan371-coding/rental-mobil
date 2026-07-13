@@ -31,7 +31,7 @@
             <tbody class="divide-y divide-slate-200">
                 @forelse($data as $items)
                 <tr class="bg-white hover:bg-slate-50">
-                    <td class="px-4 py-4">{{ $items->id_rental }}</td>
+                    <td class="px-4 py-4">{{ $items->rental->kode_rental ?? '-'}}</td>
                     <td class="px-4 py-4">{{ $items->tanggal_pengembalian }}</td>
                     <td class="px-4 py-4">{{ $items->kondisi_mobil }}</td>
                     <td class="px-4 py-4">{{ $items->denda }}</td>

@@ -12,9 +12,10 @@
     <form action="{{ route('admin.promo.store') }}" method="POST" class="space-y-6">
         @csrf
         <div class="grid gap-6 sm:grid-cols-2">
+
             <div>
-                <label for="kode_promo" class="block text-sm font-semibold text-slate-700">Kode Promo</label>
-                <input type="text" id="kode_promo" name="kode_promo" value="{{ old('kode_promo') }}" required class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                <label for="nama_promo" class="block text-sm font-semibold text-slate-700">Nama Promo</label>
+                <input type="text" id="nama_promo" name="nama_promo" value="{{ old('nama_promo') }}" required class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
             </div>
             <div>
                 <label for="potongan" class="block text-sm font-semibold text-slate-700">Potongan</label>
@@ -27,6 +28,18 @@
             <div>
                 <label for="tanggal_selesai" class="block text-sm font-semibold text-slate-700">Tanggal Selesai</label>
                 <input type="date" id="tanggal_selesai" name="tanggal_selesai" value="{{ old('tanggal_selesai') }}" required class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+            </div>
+            <div>
+                <label for="jenis" class="block text-sm font-semibold text-slate-700">Jenis Promo</label>
+                <select id="jenis" name="jenis" required class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                    <option value="">Pilih Jenis Promo</option>
+                    <option value="persentase" {{ old('jenis') == 'persentase' ? 'selected' : '' }}>Persentase</option>
+                    <option value="nominal" {{ old('jenis') == 'nominal' ? 'selected' : '' }}>Nominal</option>
+                </select>
+            </div>
+            <div>
+                <label for="minimal_transaksi" class="block text-sm font-semibold text-slate-700">Minimal Transaksi</label>
+                <input type="number" id="minimal_transaksi" name="minimal_transaksi" value="{{ old('minimal_transaksi') }}" required class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
             </div>
         </div>
 

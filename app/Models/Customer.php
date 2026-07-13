@@ -3,10 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasKode;
 
 class Customer extends Model
 {
+
+    use HasKode;
+
+    protected $prefix = 'CST';
+
+    protected $kodeField = 'kode_customer';
     protected $fillable = [
+        'kode_customer',
         'user_id',
         'nama',
         'alamat',

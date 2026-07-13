@@ -33,7 +33,7 @@ class ServiceMobilController extends Controller
         ]);
 
         return redirect()->route('admin.service.index')
-                ->with('success', 'Data service berhasil ditambahkan');
+            ->with('success', 'Data service berhasil ditambahkan');
     }
 
     public function edit(string $id)
@@ -56,9 +56,29 @@ class ServiceMobilController extends Controller
             'deskripsi' => $request->deskripsi,
             'status_service' => $request->status_service,
         ]);
+        if ($request->status_service == 'pending') {
+
+            $service->mobil->update([
+                'status' => 'service'
+            ]);
+        }
+
+        if ($request->status_service == 'proses') {
+
+            $service->mobil->update([
+                'status' => 'service'
+            ]);
+        }
+
+        if ($request->status_service == 'selesai') {
+
+            $service->mobil->update([
+                'status' => 'tersedia'
+            ]);
+        }
 
         return redirect()->route('admin.service.index')
-                ->with('success', 'Data service berhasil diupdate');
+            ->with('success', 'Data service berhasil diupdate');
     }
 
     public function destroy(string $id)
@@ -68,6 +88,6 @@ class ServiceMobilController extends Controller
         $service->delete();
 
         return redirect()->route('admin.service.index')
-                ->with('success', 'Data service berhasil dihapus');
+            ->with('success', 'Data service berhasil dihapus');
     }
 }

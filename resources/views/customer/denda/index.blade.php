@@ -15,7 +15,7 @@
                 <thead class="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500">
                     <tr>
                         <th class="px-4 py-3">No</th>
-                        <th class="px-4 py-3">ID Rental</th>
+                        <th class="px-4 py-3">Kode Rental</th>
                         <th class="px-4 py-3">Jumlah Denda</th>
                         <th class="px-4 py-3">Keterangan</th>
                     </tr>
@@ -24,7 +24,7 @@
                     @forelse($dendas as $denda)
                         <tr>
                             <td class="px-4 py-3">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-3">{{ $denda->id_rental }}</td>
+                            <td class="px-4 py-3">{{ $denda->rental->kode_rental }}</td>
                             <td class="px-4 py-3">Rp {{ number_format($denda->jumlah_denda, 0, ',', '.') }}</td>
                             <td class="px-4 py-3">{{ $denda->keterangan ?? '-' }}</td>
                         </tr>

@@ -73,4 +73,26 @@ class CustomerController extends Controller
 
         return view('customer.profile', compact('customer'));
     }
+
+    public function updateProfile(Request $request)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
+            'no_identitas' => 'nullable|string|max:255',
+            'no_telp' => 'required|string|max:50',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        $user = Auth::user();
+        if ($user->customer) {
+            $user->customer->update($validated);
+        } else {
+            $validated['user_id'] = $user->id;
+            $validated['email'] = $validated['email'] ?? $user->email;
+            Customer::create($validated);
+        }
+
+        return redirect()->route('customer.profile')->with('success', 'Profil Anda berhasil diperbarui.');
+    }
 }

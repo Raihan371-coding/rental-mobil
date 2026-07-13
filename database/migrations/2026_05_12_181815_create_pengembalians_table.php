@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_pengembalian')->unique();
             $table->foreignId('id_rental')->constrained('rentals')->onDelete('cascade');
             $table->date('tanggal_pengembalian');
             $table->enum('kondisi_mobil', ['baik', 'rusak']);

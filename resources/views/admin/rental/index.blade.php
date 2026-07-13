@@ -23,10 +23,10 @@
             <table class="min-w-full divide-y divide-slate-200 text-left text-sm text-slate-700">
                 <thead class="border-b border-slate-200 bg-white text-slate-900">
                     <tr>
-                        <th class="px-4 py-3">ID Rental</th>
-                        <th class="px-4 py-3">ID Booking</th>
-                        <th class="px-4 py-3">ID Customer</th>
-                        <th class="px-4 py-3">ID Mobil</th>
+                        <th class="px-4 py-3">Kode Rental</th>
+                        <th class="px-4 py-3">Kode Booking</th>
+                        <th class="px-4 py-3">Kode Customer</th>
+                        <th class="px-4 py-3">Kode Mobil</th>
                         <th class="px-4 py-3">Tanggal Rental</th>
                         <th class="px-4 py-3">Tanggal Kembali</th>
                         <th class="px-4 py-3">Total Harga</th>
@@ -37,18 +37,31 @@
                 <tbody class="divide-y divide-slate-200">
                     @forelse($data as $item)
                         <tr class="bg-white hover:bg-slate-50">
-                            <td class="px-4 py-4">{{ $item->id_rental }}</td>
-                            <td class="px-4 py-4">{{ $item->booking_id }}</td>
-                            <td class="px-4 py-4">{{ $item->id_customer }}</td>
-                            <td class="px-4 py-4">{{ $item->id_mobil }}</td>
+                            <td>{{ $item->kode_rental }}</td>
+
+                            <td>
+                                {{ $item->booking->kode_booking ?? '-' }}
+                            </td>
+
+                            <td>
+                                {{ $item->customer->kode_customer ?? '-' }}
+                                - {{ $item->customer->nama ?? '' }}
+                            </td>
+
+                            <td>
+                                {{ $item->mobil->kode_mobil ?? '-' }}
+                                - {{ $item->mobil->nama_mobil ?? '' }}
+                            </td>
+
                             <td class="px-4 py-4">{{ $item->tanggal_rental }}</td>
                             <td class="px-4 py-4">{{ $item->tanggal_kembali }}</td>
-                            <td class="px-4 py-4">{{ $item->total_harga }}</td>
+                            <td class="px-4 py-4">Rp. {{ $item->total_harga }}</td>
                             <td class="px-4 py-4">{{ $item->status }}</td>
                             <td class="px-4 py-4 space-x-2">
                                 <a href="{{ route('admin.rental.edit', $item->id) }}"
                                     class="inline-flex rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-800">Edit</a>
-                                <form action="{{ route('admin.rental.destroy', $item->id) }}" method="POST" class="inline">
+                                <form action="{{ route('admin.rental.destroy', $item->id) }}" method="POST"
+                                    class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

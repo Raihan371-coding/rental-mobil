@@ -10,22 +10,16 @@ return new class extends Migration
     {
         Schema::create('service_mobils', function (Blueprint $table) {
             $table->id();
-
-            // tanpa foreign key
-            $table->integer('mobil_id');
-
+            $table->string('kode_service')->unique();
+            $table->foreignId('mobil_id')->constrained('mobils')->onDelete('cascade');
             $table->date('tanggal_service');
-
             $table->integer('biaya_service');
-
             $table->text('deskripsi');
-
             $table->enum('status_service', [
                 'pending',
                 'proses',
                 'selesai'
             ]);
-
             $table->timestamps();
         });
     }

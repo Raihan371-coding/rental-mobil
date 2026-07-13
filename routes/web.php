@@ -11,12 +11,32 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
+use App\Http\Controllers\landingPage;
+use App\Models\Promo;
+use App\Models\Mobil;
 
 // Landing page (public)
 Route::redirect('/', '/welcome');
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/', function () {
+
+    $mobils = Mobil::where('status', 'tersedia')
+        ->latest()
+        ->take(6)
+        ->get();
+
+    $promos = Promo::whereDate('tanggal_mulai', '<=', now())
+        ->whereDate('tanggal_selesai', '>=', now())
+        ->latest()
+        ->take(4)
+        ->get();
+
+    return view('welcome', compact(
+        'mobils',
+        'promos'
+    ));
+})->name('home');
+Route::get('/mobil', [landingPage::class, 'mobil'])->name('landing.mobil');
+Route::get('/promo', [landingPage::class, 'promo'])->name('landing.promo');
 
 /*
 |--------------------------------------------------------------------------

@@ -26,7 +26,7 @@ class="relative h-[720px]">
 
                 Nikmati kebebasan perjalanan Anda dengan armada pilihan
                 terbaik. Dari bisnis hingga liburan keluarga,
-                RentalKu hadir untuk setiap langkah Anda.
+                Rentify hadir untuk setiap langkah Anda.
 
             </p>
 

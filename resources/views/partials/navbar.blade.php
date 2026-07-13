@@ -8,15 +8,17 @@
 
                 <a href="{{ url('/') }}"
                     class="text-blue-800 shadow-md border-b-2 border-b-blue-600 transition-colors duration-200">Beranda</a>
-                <a href="#fleet"
-                    class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200">Cara
+                <a href="{{ route('home') }}#how-it-works"
+                    class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200 transition">Cara
                     Kerja</a>
-                <a href="#pricing"
+                <a href="{{ route('home') }}#promo"
                     class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200">Promo</a>
-                <a href="#pricing"
-                    class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200">Tentang
-                    Kami</a>
-                <a href="#pricing"
+                <a href="{{ route('home') }}#katalog"
+                    class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200">Katalog</a>
+                <a href="{{ route('home') }}#testimoni"
+                    class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200">Testimoni</a>
+
+                <a href="{{ route('home') }}#kontak"
                     class="text-gray-600 hover:text-gray-900 hover:border-b-2 hover:border-b-cyan-500 transition-colors duration-200">Kontak</a>
             </div>
             <div class=" hidden md:flex items-center space-x-3">
@@ -87,15 +89,18 @@
         <div class="px-4 py-3 space-y-2">
             <a href="{{ url('/') }}"
                 class="block rounded-md px-2 py-2 text-sm font-medium text-white bg-blue-600">Beranda</a>
-            <a href="#fleet"
+            <a href="{{ route('home') }}#how-it-works"
                 class="block rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">Cara
                 Kerja</a>
-            <a href="#pricing"
+            <a href="{{ route('home') }}#promo"
                 class="block rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">Promo</a>
-            <a href="#pricing"
-                class="block rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">Tentang
-                Kami</a>
-            <a href="#pricing"
+            <a href="{{ route('home') }}#katalog"
+                class="block rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">Katalog
+            </a>
+            <a href="{{ route('home') }}#testimoni"
+                class="block rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">Testimoni
+            </a>
+            <a href="{{ route('home') }}#kontak"
                 class="block rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">Kontak</a>
 
             <div class="border-t-2 border-t-blue-500 pt-2 mt-2 space-y-2">

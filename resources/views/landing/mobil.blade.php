@@ -1,4 +1,10 @@
-<section class="py-24 bg-white" id="katalog">
+@extends('layouts.landing')
+
+@section('title', 'Rental Mobil - Home')
+
+@section('content')
+
+<section class="py-24 bg-white" id="mobil">
 
     <div class="max-w-7xl mx-auto px-6">
 
@@ -122,3 +128,4 @@
     </div>
 
 </section>
+@endsection

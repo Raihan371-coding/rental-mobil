@@ -1,83 +1,105 @@
-<section class="py-24 bg-slate-50">
-
+<section class="py-24 bg-slate-50" id="promo">
     <div class="max-w-7xl mx-auto px-6">
 
-        <div class="flex justify-between items-center mb-10">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
 
             <div>
-
                 <h2 class="text-3xl font-bold text-slate-800">
                     Promo Eksklusif
                 </h2>
 
-                <p class="text-gray-500 mt-2">
-                    Penawaran terbaik khusus untuk member RentalKu.
+                <p class="mt-2 text-slate-500">
+                    Nikmati berbagai promo menarik yang sedang berlangsung.
                 </p>
-
             </div>
 
-            <a href="#" class="text-sky-700 font-semibold hover:underline">
+            <a href="{{ route('landing.promo') }}" class="text-sky-700 font-semibold hover:underline">
                 Lihat Semua Promo →
             </a>
 
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-8">
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
-            <!-- Promo 1 -->
-            <div class="relative rounded-3xl overflow-hidden group h-72">
+            @forelse($promos as $promo)
+                @php
+                    $aktif = now()->between($promo->tanggal_mulai, $promo->tanggal_selesai);
+                @endphp
 
-                <img src="{{ asset('images/promo1.jpg') }}"
-                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div
+                    class="rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl transition duration-300 p-6">
 
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div class="flex items-center justify-between">
 
-                <div class="absolute bottom-8 left-8 text-white">
+                        <span
+                            class="rounded-full px-3 py-1 text-xs font-bold
+                            {{ $promo->jenis == 'persentase' ? 'bg-blue-100 text-blue-700' : 'bg-emerald-100 text-emerald-700' }}">
 
-                    <span class="bg-orange-400 text-xs px-3 py-1 rounded-full">
-                        HEMAT 20%
-                    </span>
+                            {{ strtoupper($promo->jenis) }}
 
-                    <h3 class="text-3xl font-bold mt-4">
-                        Liburan Hemat Keluarga
-                    </h3>
+                        </span>
 
-                    <p class="mt-3 text-gray-200">
-                        Berlaku untuk penyewaan minimal 3 hari.
-                    </p>
+                        @if ($aktif)
+                            <span class="rounded-full bg-green-100 text-green-700 text-xs px-3 py-1">
+                                Aktif
+                            </span>
+                        @endif
+
+                    </div>
+
+                    <div class="mt-6">
+
+                        <h3 class="text-4xl font-bold text-slate-900">
+
+                            @if ($promo->jenis == 'persentase')
+                                {{ $promo->potongan }}%
+                            @else
+                                Rp {{ number_format($promo->potongan, 0, ',', '.') }}
+                            @endif
+
+                        </h3>
+
+                        <p class="mt-2 text-lg font-semibold text-slate-700">
+                            {{ $promo->kode_promo }}
+                        </p>
+
+                        <p class="mt-4 text-sm text-slate-500">
+                            Berlaku mulai
+                            <strong>{{ \Carbon\Carbon::parse($promo->tanggal_mulai)->format('d M Y') }}</strong>
+                            sampai
+                            <strong>{{ \Carbon\Carbon::parse($promo->tanggal_selesai)->format('d M Y') }}</strong>
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+            @empty
 
-            <!-- Promo 2 -->
-            <div class="relative rounded-3xl overflow-hidden group h-72">
+                <div class="col-span-full">
 
-                <img src="{{ asset('images/promo2.jpg') }}"
-                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="rounded-3xl border border-dashed border-slate-300 bg-white p-12 text-center">
 
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <svg class="mx-auto h-12 w-12 text-slate-300" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                d="M9 14l6-6m0 0H9m6 0v6" />
+                        </svg>
 
-                <div class="absolute bottom-8 left-8 text-white">
+                        <h3 class="mt-4 text-lg font-semibold text-slate-700">
+                            Belum Ada Promo
+                        </h3>
 
-                    <span class="bg-sky-700 text-xs px-3 py-1 rounded-full">
-                        BUSINESS
-                    </span>
+                        <p class="mt-2 text-slate-500">
+                            Nantikan promo menarik dari RentalKu.
+                        </p>
 
-                    <h3 class="text-3xl font-bold mt-4">
-                        Promo Sewa Bulanan
-                    </h3>
-
-                    <p class="mt-3 text-gray-200">
-                        Solusi hemat untuk operasional perusahaan.
-                    </p>
+                    </div>
 
                 </div>
-
-            </div>
+            @endforelse
 
         </div>
 
     </div>
-
 </section>

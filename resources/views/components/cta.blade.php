@@ -1,4 +1,4 @@
-<section class="py-24">
+<section class="py-24" id="kontak">
 
     <div class="max-w-7xl mx-auto px-6">
 

@@ -1,4 +1,4 @@
-<section class="py-24 bg-slate-50">
+<section class="py-24 bg-slate-50" id="testimoni">
 
     <div class="max-w-7xl mx-auto px-6">
 
@@ -13,7 +13,7 @@
             </h2>
 
             <p class="text-gray-500 mt-4">
-                Ribuan pelanggan telah mempercayakan perjalanan mereka kepada RentalKu.
+                Ribuan pelanggan telah mempercayakan perjalanan mereka kepada Rentify.
             </p>
 
         </div>

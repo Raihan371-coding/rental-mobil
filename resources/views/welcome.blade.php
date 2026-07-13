@@ -7,8 +7,6 @@
     {{-- Hero Section --}}
     @include('components.hero')
 
-    {{-- Search Box Section --}}
-    @include('components.search-box')
 
     {{-- Stats Section --}}
     @include('components.stats')

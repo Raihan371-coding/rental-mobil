@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('dendas', function (Blueprint $table) {
             $table->id();
-        $table->integer('id_rental');
-        $table->integer('jumlah_denda');
-        $table->text('keterangan')->nullable();
-        $table->timestamps();
+            $table->string('kode_denda')->unique();
+            $table->foreignId('id_rental')->constrained('rentals')->onDelete('cascade');
+            $table->integer('jumlah_denda');
+            $table->text('keterangan')->nullable();
+            $table->timestamps();
         });
     }
 

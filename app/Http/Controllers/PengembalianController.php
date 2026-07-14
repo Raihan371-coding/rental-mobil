@@ -96,7 +96,12 @@ class PengembalianController extends Controller
     public function edit($id)
     {
         $data = Pengembalian::findOrFail($id);
-        return view('admin.pengembalian.edit', compact('data'));
+        $rentals = Rental::orderBy('kode_rental')->get();
+
+        return view('admin.pengembalian.edit', compact(
+            'data',
+            'rentals'
+        ));
     }
 
     public function update(Request $request, $id)

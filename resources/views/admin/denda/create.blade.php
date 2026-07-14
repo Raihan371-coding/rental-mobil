@@ -3,59 +3,129 @@
 @section('title', 'Tambah Denda')
 
 @section('content')
-    <div class="rounded-[2rem] bg-white p-6 shadow-[0_24px_80px_-40px_rgba(15,23,42,0.2)]">
-        <div class="mb-6">
-            <h1 class="text-2xl font-semibold text-slate-950">Form Tambah Denda</h1>
-            <p class="mt-2 text-sm text-slate-600">Tambahkan denda baru untuk rental.</p>
+
+    {{-- ===================== PAGE HEADER ===================== --}}
+    <div class="mb-6">
+        <div class="flex items-center gap-2 text-sm text-slate-500 mb-3">
+            <a href="{{ route('admin.denda.index') }}" class="hover:text-slate-700 transition">Data Denda</a>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span class="text-slate-900 font-medium">Tambah Denda</span>
+        </div>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">Tambah Denda Baru</h1>
+                <p class="mt-1 text-sm text-slate-500">Tambahkan data denda baru</p>
+            </div>
+            <a href="{{ route('admin.denda.index') }}"
+                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors w-full sm:w-auto">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Kembali
+            </a>
+        </div>
+    </div>
+
+    <div class="rounded-2xl bg-white shadow-sm border border-slate-100 overflow-hidden">
+        <div class="flex items-center gap-3 border-b border-slate-100 bg-slate-50 px-6 py-4">
+            <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-sky-100 text-sky-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-base font-bold text-slate-900">Form Tambah Denda</h2>
+                <p class="text-xs text-slate-400">Lengkapi data di bawah ini</p>
+            </div>
         </div>
 
-        <form action="{{ route('admin.denda.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.denda.store') }}" method="POST" class="space-y-6 p-6" id="dendaForm">
             @csrf
             <div class="grid gap-6 sm:grid-cols-2">
                 <div>
                     <label for="id_rental" class="block text-sm font-semibold text-slate-700">
-                        Rental
+                        Kode Rental
                     </label>
-
                     <select id="id_rental" name="id_rental"
-                        class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2">
-
-                        <option value="">Pilih Rental</option>
-
+                        class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                        <option value="">Pilih Kode Rental</option>
                         @foreach ($rentals as $rental)
                             <option value="{{ $rental->id }}" {{ old('id_rental') == $rental->id ? 'selected' : '' }}>
-
                                 {{ $rental->kode_rental }}
-
                             </option>
                         @endforeach
-
                     </select>
+                    @error('id_rental')
+                        <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
+
                 <div>
                     <label for="jumlah_denda" class="block text-sm font-semibold text-slate-700">Jumlah Denda</label>
-                    <input type="number" id="jumlah_denda" name="jumlah_denda" value="{{ old('jumlah_denda') }}"
-                        class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                    <div class="relative mt-2">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-sm text-slate-400">Rp</span>
+                        <input type="number" id="jumlah_denda" name="jumlah_denda" value="{{ old('jumlah_denda') }}"
+                            class="block w-full rounded-lg border border-slate-300 py-2 pl-9 pr-3 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">
+                    </div>
+                    @error('jumlah_denda')
+                        <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
-            <div class="sm:col-span-2">
 
-                <label class="block text-sm font-semibold text-slate-700">
-
+            <div>
+                <label for="keterangan" class="block text-sm font-semibold text-slate-700">
                     Keterangan
-
                 </label>
-
-                <textarea name="keterangan" rows="3" class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2">{{ old('keterangan') }}</textarea>
-
+                <textarea id="keterangan" name="keterangan" rows="3"
+                    class="mt-2 block w-full rounded-lg border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500">{{ old('keterangan') }}</textarea>
+                @error('keterangan')
+                    <p class="mt-1.5 text-xs font-medium text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="flex justify-end gap-3">
+            <div class="flex flex-col-reverse gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:justify-start">
                 <a href="{{ route('admin.denda.index') }}"
-                    class="rounded-full border border-slate-200 bg-white px-5 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Batal</a>
+                    class="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-center text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+                    Batal
+                </a>
                 <button type="submit"
-                    class="rounded-full bg-sky-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-sky-700">Simpan</button>
+                    class="inline-flex items-center justify-center gap-2 rounded-full bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-sky-700">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Simpan
+                </button>
             </div>
         </form>
     </div>
+
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: @json(session('success')),
+                confirmButtonColor: '#0284c7',
+                timer: 2500,
+                timerProgressBar: true
+            });
+        @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Data belum lengkap',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
+                confirmButtonColor: '#ef4444'
+            });
+        @endif
+    </script>
+@endpush

@@ -14,9 +14,6 @@
     {{-- How It Works Section --}}
     @include('components.how-it-works')
 
-    {{-- Features Section --}}
-    @include('components.features')
-
     {{-- Promo Section --}}
     @include('components.promo')
 

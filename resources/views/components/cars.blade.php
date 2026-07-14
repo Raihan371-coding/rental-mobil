@@ -1,4 +1,4 @@
-<section class="py-24 bg-white" id="katalog">
+<section class="py-24 bg-white" id="katalog" data-aos="fade-up">
 
     <div class="max-w-7xl mx-auto px-6">
 

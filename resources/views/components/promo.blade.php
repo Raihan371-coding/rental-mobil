@@ -1,4 +1,4 @@
-<section class="py-24 bg-slate-50" id="promo">
+<section class="py-24 bg-slate-50" id="promo" data-aos="fade-up">
     <div class="max-w-7xl mx-auto px-6">
 
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">

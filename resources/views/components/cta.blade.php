@@ -1,4 +1,4 @@
-<section class="py-24" id="kontak">
+<section class="py-24" id="kontak" data-aos="fade-up">
 
     <div class="max-w-7xl mx-auto px-6">
 

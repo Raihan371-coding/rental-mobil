@@ -1,4 +1,4 @@
-<section class="py-24 bg-slate-50" id="how-it-works">
+<section class="py-24 bg-slate-50" id="how-it-works" data-aos="fade-up">
 
     <div class="max-w-7xl mx-auto px-6">
 

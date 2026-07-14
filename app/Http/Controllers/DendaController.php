@@ -46,7 +46,12 @@ class DendaController extends Controller
 
     public function edit(Denda $denda)
     {
-        return view('admin.denda.edit', compact('denda'));
+        $rentals = Rental::orderBy('kode_rental')->get();
+
+        return view('admin.denda.edit', compact(
+            'denda',
+            'rentals'
+        ));
     }
 
     public function update(Request $request, Denda $denda)

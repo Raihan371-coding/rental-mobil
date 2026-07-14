@@ -12,8 +12,13 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\PromoController;
 use App\Http\Controllers\landingPage;
+use App\Http\Controllers\AdminDashboardController;
 use App\Models\Promo;
 use App\Models\Mobil;
+use App\Models\Customer;
+use App\Models\DataBooking;
+use App\Models\Rental;
+use App\Models\Pembayaran;
 
 // Landing page (public)
 Route::redirect('/', '/welcome');
@@ -46,9 +51,8 @@ Route::get('/promo', [landingPage::class, 'promo'])->name('landing.promo');
 Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->name('admin.')->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+        ->name('dashboard');
 
     // Mobil CRUD
     Route::resource('mobil', MobilController::class);

@@ -1,4 +1,4 @@
-<section class="py-24 bg-slate-50" id="testimoni">
+<section class="py-24 bg-slate-50" id="testimoni" data-aos="fade-up">
 
     <div class="max-w-7xl mx-auto px-6">
 

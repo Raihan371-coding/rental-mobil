@@ -74,7 +74,6 @@ class RentalController extends Controller
             'status' => 'required|in:rental,kembali',
         ]);
 
-        Rental::create($validated);
 
         $rental = Rental::create($validated);
 

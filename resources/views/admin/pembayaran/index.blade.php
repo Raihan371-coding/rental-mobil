@@ -85,9 +85,9 @@
                             <td class="px-5 py-4">
                                 @if ($item->bukti_pembayaran)
                                     <button type="button"
-                                        onclick="showBukti('{{ asset('bukti_pembayaran/' . $item->bukti_pembayaran) }}', '{{ $item->kode_pembayaran }}')"
+                                        onclick="showBukti('{{ asset('storage/bukti_pembayaran/' . $item->bukti_pembayaran) }}', '{{ $item->kode_pembayaran }}')"
                                         class="block">
-                                        <img src="{{ asset('bukti_pembayaran/' . $item->bukti_pembayaran) }}"
+                                        <img src="{{ asset('storage/bukti_pembayaran/' . $item->bukti_pembayaran) }}"
                                             class="w-14 h-14 rounded-lg border border-slate-200 object-cover hover:opacity-80 transition cursor-zoom-in">
                                     </button>
                                 @else

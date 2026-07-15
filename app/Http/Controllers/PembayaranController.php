@@ -111,19 +111,17 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::findOrFail($id);
 
         if ($request->hasFile('bukti_pembayaran')) {
+            // 1. Ambil file dan buat nama unik
+            $file = $request->file('bukti_pembayaran');
+            $namaFile = time() . '_' . $file->getClientOriginalName();
 
-            $namaFile = time() . '_' . $request->file('bukti_pembayaran')->getClientOriginalName();
-
-            $request->file('bukti_pembayaran')
-                ->move(public_path('bukti_pembayaran'), $namaFile);
+            // 2. Simpan ke storage/app/public/bukti_pembayaran
+            $file->storeAs('bukti_pembayaran', $namaFile, 'public');
 
             $pembayaran->update([
+                // Cukup simpan nama filenya saja seperti kode Anda sebelumnya
                 'bukti_pembayaran' => $namaFile,
-
-                // customer sudah upload
                 'status_verifikasi' => 'menunggu',
-
-                // pembayaran sekarang menunggu dicek admin
                 'status_bayar' => 'menunggu_verifikasi'
             ]);
         }

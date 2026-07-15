@@ -1,123 +1,61 @@
-<section class="py-24 bg-slate-50" id="testimoni" data-aos="fade-up">
+@php
+    $testimonials = [
+        [
+            'name' => 'Andi Saputra',
+            'city' => 'Bandung',
+            'avatar' => 'https://i.pravatar.cc/100?img=11',
+            'message' => 'Pelayanan sangat cepat dan mobil dalam kondisi bersih. Proses booking juga mudah dan transparan.',
+        ],
+        [
+            'name' => 'Siti Rahma',
+            'city' => 'Jakarta',
+            'avatar' => 'https://i.pravatar.cc/100?img=32',
+            'message' => 'Sangat membantu ketika perjalanan bisnis. Harga sesuai dengan kualitas pelayanan.',
+        ],
+        [
+            'name' => 'Rina Amelia',
+            'city' => 'Surabaya',
+            'avatar' => 'https://i.pravatar.cc/100?img=48',
+            'message' => 'Armada lengkap dan customer service sangat responsif. Sangat direkomendasikan.',
+        ],
+    ];
+@endphp
 
+<section class="py-24 bg-ink" id="testimoni" data-aos="fade-up">
     <div class="max-w-7xl mx-auto px-6">
-
-        <div class="text-center">
-
-            <span class="text-orange-500 font-semibold uppercase tracking-widest">
-                Testimonial
-            </span>
-
-            <h2 class="text-4xl font-bold text-slate-800 mt-4">
+        <div class="max-w-xl">
+            <span class="font-mono-plate text-xs tracking-[0.3em] text-sky-400 uppercase">Testimonial</span>
+            <h2 class="font-display text-4xl lg:text-5xl font-bold text-white mt-3 uppercase">
                 Apa Kata Pelanggan Kami?
             </h2>
-
-            <p class="text-gray-500 mt-4">
-                Ribuan pelanggan telah mempercayakan perjalanan mereka kepada Rentify.
-            </p>
-
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
-
-            <div class="bg-white rounded-3xl shadow-lg p-8">
-
-                <div class="flex items-center gap-4">
-
-                    <img src="https://i.pravatar.cc/100?img=11"
-                        class="w-16 h-16 rounded-full">
-
-                    <div>
-
-                        <h3 class="font-bold">
-                            Andi Saputra
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Bandung
-                        </p>
-
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+            @foreach ($testimonials as $t)
+                <div class="bg-white/[0.04] border border-white/10 rounded-2xl p-8">
+                    <div class="text-sky-400 text-lg tracking-wider">
+                        ★★★★★
                     </div>
 
-                </div>
+                    <p class="mt-5 text-slate-300 leading-relaxed">
+                        &ldquo;{{ $t['message'] }}&rdquo;
+                    </p>
 
-                <div class="mt-5 text-yellow-400 text-xl">
-                    ★★★★★
-                </div>
+                    <div class="flex items-center gap-3 mt-6 pt-6 border-t border-white/10">
+                        <img src="{{ $t['avatar'] }}" class="w-11 h-11 rounded-full">
 
-                <p class="mt-5 text-gray-600 leading-7">
-                    Pelayanan sangat cepat dan mobil dalam kondisi bersih.
-                    Proses booking juga mudah dan transparan.
-                </p>
+                        <div>
+                            <h3 class="font-semibold text-white text-sm">
+                                {{ $t['name'] }}
+                            </h3>
 
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-lg p-8">
-
-                <div class="flex items-center gap-4">
-
-                    <img src="https://i.pravatar.cc/100?img=32"
-                        class="w-16 h-16 rounded-full">
-
-                    <div>
-
-                        <h3 class="font-bold">
-                            Siti Rahma
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Jakarta
-                        </p>
-
+                            <p class="text-slate-400 text-xs">
+                                {{ $t['city'] }}
+                            </p>
+                        </div>
                     </div>
-
                 </div>
-
-                <div class="mt-5 text-yellow-400 text-xl">
-                    ★★★★★
-                </div>
-
-                <p class="mt-5 text-gray-600 leading-7">
-                    Sangat membantu ketika perjalanan bisnis.
-                    Harga sesuai dengan kualitas pelayanan.
-                </p>
-
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-lg p-8">
-
-                <div class="flex items-center gap-4">
-
-                    <img src="https://i.pravatar.cc/100?img=48"
-                        class="w-16 h-16 rounded-full">
-
-                    <div>
-
-                        <h3 class="font-bold">
-                            Rina Amelia
-                        </h3>
-
-                        <p class="text-gray-500 text-sm">
-                            Surabaya
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="mt-5 text-yellow-400 text-xl">
-                    ★★★★★
-                </div>
-
-                <p class="mt-5 text-gray-600 leading-7">
-                    Armada lengkap dan customer service sangat responsif.
-                    Sangat direkomendasikan.
-                </p>
-
-            </div>
-
+            @endforeach
         </div>
-
     </div>
-
 </section>

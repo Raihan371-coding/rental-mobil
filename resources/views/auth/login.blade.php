@@ -15,7 +15,7 @@
 
         {{-- ===================== LEFT (branding) ===================== --}}
         <div class="hidden lg:block w-1/2 relative">
-            <img src="{{ asset('build/assets/images/auth.jpg') }}" alt="Rentify"
+            <img src="{{ asset('images/auth.jpg') }}" alt="Rentify"
                 class="absolute inset-0 w-full h-full object-cover">
 
             {{-- Overlay gradient --}}

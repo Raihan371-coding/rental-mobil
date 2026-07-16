@@ -13,7 +13,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse ($mobils->take(3) as $mobil)
                 <div
-                    class="group bg-white rounded-2xl overflow-hidden border border-black/5 shadow-sm hover:shadow-xl transition duration-300">
+                    class="group bg-white rounded-2xl overflow-hidden border border-black/5 shadow-sm hover:shadow-xl transition duration-300 flex flex-col h-full">
                     <div class="overflow-hidden relative">
                         @if ($mobil->foto)
                             <img src="{{ asset('storage/' . $mobil->foto) }}"
@@ -28,7 +28,7 @@
                         </span>
                     </div>
 
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-1">
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="font-display text-2xl font-bold text-ink uppercase">
@@ -62,13 +62,13 @@
                                 </span>
                             @endif
                         </div>
-                    </div>
-                    <div
-                        class="block text-center w-full mt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors bottom-0">
+                        <div
+                            class="block text-center w-full mtt-auto pt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors">
 
-                        <a href="{{ route('customer.mobil.index') }}">
-                            Booking Sekarang
-                        </a>
+                            <a href="{{ route('customer.mobil.index') }}">
+                                Booking Sekarang
+                            </a>
+                        </div>
                     </div>
                 </div>
             @empty

@@ -63,7 +63,7 @@
                             @endif
                         </div>
 
-                        <a href="{{ route('login') }}"
+                        <a href="{{ route('customer.mobil.index') }}"
                             class="block text-center w-full mt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors">
                             Booking Sekarang
                         </a>

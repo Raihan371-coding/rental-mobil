@@ -90,7 +90,7 @@
 
                             </div>
 
-                            <a href="{{ route('login') }}"
+                            <a href="{{ route('customer.mobil.index') }}"
                                 class="block text-center w-full mt-8 bg-sky-900 hover:bg-sky-950 text-white py-3 rounded-xl transition">
 
                                 Booking Sekarang

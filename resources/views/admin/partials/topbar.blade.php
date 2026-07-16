@@ -1,5 +1,4 @@
-<header
-    class="fixed top-0 right-0 left-0 lg:left-64 h-16 px-6 py-6 bg-white/80 backdrop-blur-md border-b border-slate-200 z-30">
+<header class="fixed top-0 right-0 left-0 lg:left-64 h-16 bg-white/80 backdrop-blur-md border-b border-slate-200 z-30">
 
     <div class="flex items-center justify-between h-full px-4 sm:px-6 lg:px-8">
 
@@ -50,17 +49,18 @@
             </div>
 
             <button type="button" data-theme-toggle onclick="toggleTheme()"
-                class="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition duration-150 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
-                <svg data-theme-icon-moon class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="inline-flex h-10 w-10 sm:w-auto items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-0 sm:px-3 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition duration-150 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                <svg data-theme-icon-moon class="w-4 h-4 shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M20.354 15.354A9 9 0 118.646 3.646a7 7 0 1011.708 11.708z" />
                 </svg>
-                <svg data-theme-icon-sun class="hidden w-4 h-4" fill="none" stroke="currentColor"
+                <svg data-theme-icon-sun class="hidden w-4 h-4 shrink-0" fill="none" stroke="currentColor"
                     viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m0-11.314l1.414 1.414M16.95 16.95l1.414 1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
                 </svg>
-                <span data-theme-toggle-label>Mode Gelap</span>
+                <span data-theme-toggle-label class="hidden sm:inline">Mode Gelap</span>
             </button>
 
             {{-- Logout --}}

@@ -11,7 +11,7 @@
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @forelse ($mobils as $mobil)
+            @forelse ($mobils->take(3) as $mobil)
                 <div
                     class="group bg-white rounded-2xl overflow-hidden border border-black/5 shadow-sm hover:shadow-xl transition duration-300">
                     <div class="overflow-hidden relative">

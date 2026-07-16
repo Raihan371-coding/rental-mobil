@@ -114,16 +114,7 @@
 
             </div>
 
-            <div class="text-center mt-16">
 
-                <a href="{{ route('landing.mobil') }}"
-                    class="inline-flex bg-sky-600 hover:bg-blue-700 text-white px-10 py-4 rounded-xl transition">
-
-                    Lihat Semua Mobil
-
-                </a>
-
-            </div>
 
         </div>
 

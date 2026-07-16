@@ -22,26 +22,10 @@ use App\Models\Pembayaran;
 
 // Landing page (public)
 Route::redirect('/', '/welcome');
-Route::get('/', function () {
-
-    $mobils = Mobil::where('status', 'tersedia')
-        ->latest()
-        ->take(6)
-        ->get();
-
-    $promos = Promo::whereDate('tanggal_mulai', '<=', now())
-        ->whereDate('tanggal_selesai', '>=', now())
-        ->latest()
-        ->take(4)
-        ->get();
-
-    return view('welcome', compact(
-        'mobils',
-        'promos'
-    ));
-})->name('home');
+Route::get('/', [landingPage::class, 'index'])->name('home');
 Route::get('/mobil', [landingPage::class, 'mobil'])->name('landing.mobil');
 Route::get('/promo', [landingPage::class, 'promo'])->name('landing.promo');
+Route::get('/landing', [landingPage::class, 'landing'])->name('landing');
 
 /*
 |--------------------------------------------------------------------------

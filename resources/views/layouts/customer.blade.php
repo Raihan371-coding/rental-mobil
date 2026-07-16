@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Customer Portal') | Rental Mobil</title>
+    @include('partials.theme-script')
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
@@ -16,7 +17,7 @@
     </style>
 </head>
 
-<body class="min-h-screen bg-slate-50 text-slate-900" x-data="{ mobileNavOpen: false }">
+<body class="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100" x-data="{ mobileNavOpen: false }">
 
     <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur-sm shadow-sm">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8">
@@ -31,7 +32,7 @@
                     </svg>
                 </span>
                 <span class="leading-tight">
-                    <span class="block text-lg font-bold text-slate-950">Rentify</span>
+                    <span class="block text-lg font-bold dark:text-slate-100 text-slate-950">Rentify</span>
                     <span class="block text-[11px] font-medium text-slate-400 -mt-0.5">Customer Portal</span>
                 </span>
             </a>
@@ -59,6 +60,20 @@
 
             {{-- Desktop right side: profile + logout --}}
             <div class="hidden lg:flex items-center gap-2">
+                <button type="button" data-theme-toggle onclick="toggleTheme()"
+                    class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition duration-150 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                    <svg data-theme-icon-moon class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 118.646 3.646a7 7 0 1011.708 11.708z" />
+                    </svg>
+                    <svg data-theme-icon-sun class="hidden w-4 h-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m0-11.314l1.414 1.414M16.95 16.95l1.414 1.414M12 7a5 5 0 100 10 5 5 0 000-10z" />
+                    </svg>
+                    <span data-theme-toggle-label>Mode Gelap</span>
+                </button>
+
                 <a href="{{ route('customer.profile') }}"
                     class="flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-950 {{ request()->routeIs('customer.profile') ? 'bg-sky-50 text-sky-700' : '' }}">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

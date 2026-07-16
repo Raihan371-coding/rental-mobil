@@ -73,7 +73,7 @@
                     <label class="block text-sm font-semibold text-slate-700 mb-1.5">Metode Bayar</label>
                     <select name="metode_bayar"
                         class="block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 transition">
-                        @foreach (['Cash', 'Transfer', 'QRIS', 'E-Wallet'] as $metode)
+                        @foreach (['Transfer', 'QRIS'] as $metode)
                             <option value="{{ $metode }}"
                                 {{ old('metode_bayar', $data->metode_bayar) == $metode ? 'selected' : '' }}>
                                 {{ $metode }}</option>

@@ -50,6 +50,7 @@ class RegisteredUserController extends Controller
             return redirect(route('admin.dashboard', absolute: false));
         }
 
-        return redirect(route('customer.dashboard', absolute: false));
+        return redirect(route('customer.dashboard', absolute: false))
+            ->with('show_tutorial', true);
     }
 }

@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
+    @include('partials.theme-script')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -21,7 +22,7 @@
     </style>
 </head>
 
-<body class="bg-slate-100 antialiased">
+<body class="bg-slate-100 dark:bg-slate-950 antialiased">
 
     {{-- Mobile Sidebar Overlay --}}
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 lg:hidden hidden transition-opacity duration-300"

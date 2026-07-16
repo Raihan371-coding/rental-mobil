@@ -4,6 +4,8 @@
 
 @section('content')
 
+    @include('customer.partials.dashboard-onboarding')
+
     {{-- ===================== WELCOME BANNER ===================== --}}
     <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-600 to-blue-700 p-6 sm:p-8 shadow-lg">
         <div class="absolute -top-6 -right-6 w-32 h-32 rounded-full bg-white/10"></div>

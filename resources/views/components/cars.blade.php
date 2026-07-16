@@ -64,7 +64,7 @@
                         </div>
 
                         <a href="{{ route('customer.mobil.index') }}"
-                            class="block text-center w-full mt-auto pt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors">
+                            class="block text-center w-full mx-auto pt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors">
                             Booking Sekarang
                         </a>
                     </div>

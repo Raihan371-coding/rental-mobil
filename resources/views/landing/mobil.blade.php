@@ -89,13 +89,11 @@
                                 </span>
 
                             </div>
-
-                            <a href="{{ route('customer.mobil.index') }}"
+                            <div
                                 class="block text-center w-full mt-8 bg-sky-900 hover:bg-sky-950 text-white py-3 rounded-xl transition">
+                                <a href="{{ route('customer.mobil.index') }}" ">Booking Sekarang</a>
+                            </div>
 
-                                Booking Sekarang
-
-                            </a>
 
                         </div>
 
@@ -103,20 +101,20 @@
 
                 @empty
 
-                    <div class="col-span-full text-center py-20">
+                            <div class="col-span-full text-center py-20">
 
-                        <h3 class="text-xl font-semibold text-slate-700">
-                            Belum ada mobil yang tersedia.
-                        </h3>
+                                <h3 class="text-xl font-semibold text-slate-700">
+                                    Belum ada mobil yang tersedia.
+                                </h3>
 
-                    </div>
-                @endforelse
+                            </div>
+     @endforelse
 
-            </div>
+                            </div>
 
 
 
-        </div>
+                        </div>
 
     </section>
 @endsection

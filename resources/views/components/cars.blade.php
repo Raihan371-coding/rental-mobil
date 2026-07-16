@@ -62,13 +62,11 @@
                                 </span>
                             @endif
                         </div>
-                        <div
-                            class="block text-center w-full mt-auto pt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors">
 
-                            <a href="{{ route('customer.mobil.index') }}">
-                                Booking Sekarang
-                            </a>
-                        </div>
+                        <a href="{{ route('customer.mobil.index') }}"
+                            class="block text-center w-full mt-auto pt-7 bg-ink hover:bg-sky-600 text-white py-3.5 rounded font-semibold transition-colors">
+                            Booking Sekarang
+                        </a>
                     </div>
                 </div>
             @empty

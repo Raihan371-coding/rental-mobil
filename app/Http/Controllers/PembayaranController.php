@@ -62,7 +62,7 @@ class PembayaranController extends Controller
 
     public function edit($id)
     {
-        $data = Pembayaran::findOrFail($id);
+        $data = Pembayaran::findOrFail($id)->get('id_rental', 'kode_rental');
         return view('admin.pembayaran.edit', compact('data'));
     }
 

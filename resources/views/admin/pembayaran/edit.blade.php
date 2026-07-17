@@ -49,7 +49,7 @@
         @csrf
         @method('PUT')
         <input type="hidden" name="id_pembayaran" value="{{ $data->id_pembayaran }}">
-        <input type="hidden" name="id_rental" value="{{ $data->id_rental }}">
+        <input type="hidden" name="id_rental" value="{{ $data->rental->id_rental }}">
 
         <div class="grid gap-5 sm:grid-cols-2">
             <div>

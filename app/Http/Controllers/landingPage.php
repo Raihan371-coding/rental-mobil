@@ -28,9 +28,7 @@ class landingPage extends Controller
     }
     public function landing()
     {
-        $mobils = Mobil::latest()
-            ->take(3)
-            ->get();
+        $mobils = Mobil::latest()->get();
         return view('components.cars', compact('mobils'));
     }
 

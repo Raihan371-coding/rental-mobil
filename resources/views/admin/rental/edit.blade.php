@@ -96,7 +96,7 @@
                         @foreach ($bookings as $booking)
                             <option value="{{ $booking->id }}"
                                 {{ old('booking_id', $data->booking_id) == $booking->id ? 'selected' : '' }}>
-                                {{ $booking->kode_booking }} - {{ $booking->customer->nama }} -
+                                {{ $booking->kode_booking }} - {{ $customer->nama }} -
                                 {{ $booking->mobil->nama_mobil }}
                             </option>
                         @endforeach

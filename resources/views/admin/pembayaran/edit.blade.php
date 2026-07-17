@@ -152,7 +152,7 @@
     });
     @endif
 
-    @if($errors - > any())
+    @if($errors->any())
     Swal.fire({
         icon: 'error',
         title: 'Periksa kembali form Anda',

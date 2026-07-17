@@ -89,7 +89,7 @@
                         <option value="">Tidak terhubung ke booking</option>
                         @foreach ($bookings as $booking)
                             <option value="{{ $booking->id }}" {{ old('booking_id') == $booking->id ? 'selected' : '' }}>
-                                {{ $booking->kode_booking }} - {{ $booking->customer->nama }} -
+                                {{ $booking->kode_booking }} - {{ $customer->nama }} -
                                 {{ $booking->mobil->nama_mobil }} ·
                                 {{ \Carbon\Carbon::parse($booking->tanggal_booking)->format('d/m/Y') }}
                             </option>

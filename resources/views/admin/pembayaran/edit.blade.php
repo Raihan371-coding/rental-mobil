@@ -102,10 +102,15 @@
                 <label class="block text-sm font-semibold text-slate-700 mb-1.5">Status Bayar</label>
                 <select name="status_bayar"
                     class="block w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-900 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-100 transition">
+
+                    <option value="belum_bayar" {{ old('status_bayar', $data->status_bayar) == 'belum_bayar' ? 'selected' : '' }}>
+                        Belum Bayar</option>
+                    <option value="menunggu_verifikasi" {{ old('status_bayar', $data->status_bayar) == 'menunggu_verifikasi' ? 'selected' : '' }}>
+                        Menunggu Verifikasi</option>
                     <option value="lunas" {{ old('status_bayar', $data->status_bayar) == 'lunas' ? 'selected' : '' }}>
                         Lunas</option>
-                    <option value="belum_lunas"
-                        {{ old('status_bayar', $data->status_bayar) == 'belum_lunas' ? 'selected' : '' }}>Belum Lunas
+                    <option value="ditolak"
+                        {{ old('status_bayar', $data->status_bayar) == 'ditolak' ? 'selected' : '' }}>Ditolak
                     </option>
                 </select>
                 @error('status_bayar')
@@ -147,7 +152,7 @@
     });
     @endif
 
-    @if($errors->any())
+    @if($errors - > any())
     Swal.fire({
         icon: 'error',
         title: 'Periksa kembali form Anda',

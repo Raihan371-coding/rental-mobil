@@ -73,7 +73,7 @@ class PembayaranController extends Controller
             'tanggal_bayar'  => 'required|date',
             'metode_bayar'   => 'required|string|max:50',
             'jumlah_bayar'   => 'required|numeric|min:0',
-            'status_bayar'   => 'required|in:lunas,belum_lunas',
+            'status_bayar' => 'required|in:belum_bayar,menunggu_verifikasi,lunas,ditolak',
         ]);
 
         $pembayaran = Pembayaran::findOrFail($id);
